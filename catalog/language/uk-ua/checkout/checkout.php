@@ -15,6 +15,7 @@ $_['text_checkout_payment_method']   = 'Крок 5: Спосіб оплати';
 $_['text_checkout_confirm']          = 'Крок 6: Підтвердження замовлення';
 $_['text_modify']                    = 'Змінити &raquo;';
 $_['text_new_customer']              = 'Новий покупець';
+$_['text_abo']              = 'або';
 $_['text_returning_customer']        = 'Постійний покупець';
 $_['text_checkout']                  = 'Опції оформлення замовлення:';
 $_['text_i_am_returning_customer']   = 'Я здійснював тут покупки раніше і реєструвався';
@@ -40,7 +41,10 @@ $_['text_day']                       = 'День';
 $_['text_week']                      = 'Тиждень';
 $_['text_semi_month']                = 'Півмісяця';
 $_['text_month']                     = 'Місяць';
+$_['text_abo']                     = 'або';
+$_['entry_google_in']                     = 'Увійти як користувач';
 $_['text_year']                      = 'Рік';
+$_['text_agree_aprove']                      = 'Оформляючи замовлення, я приймаю умови:';
 
 // Column
 $_['column_name']                    = 'Назва товару';

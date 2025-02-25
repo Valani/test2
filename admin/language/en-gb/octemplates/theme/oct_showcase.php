@@ -226,7 +226,6 @@ $_['entry_atributes_modules']		   = 'In modules';
 $_['help_atributes_modules']		   = 'Octemplates - Products from categories, Promotions, New arrivals, Recommended, Bestsellers';
 
 $_['entry_isbuttoninteractive']			   = 'Enable the interactivity of the buttons when adding products to the cart, wishlist and comparison?';
-$_['entry_oct_popup_options']			   = 'Enable Poppup options when adding a product to the cart from different pages (if the products have required options)';
 $_['entry_header_compare']			   = 'Display "Compare"';
 $_['entry_header_wishlist']			   = 'Display "Wishlist"';
 $_['entry_header_product_views']	   = 'Display "Product views"';

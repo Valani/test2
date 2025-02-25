@@ -15,6 +15,7 @@ $_['button_forgotten']          = 'Забули пароль?';
 // Entry
 $_['entry_email']               = 'E-Mail';
 $_['entry_password']            = 'Пароль';
+$_['entry_google_in']            = 'Увійти через Google';
 
 // Error
 $_['error_login']               = 'Неправильно заповнені поля E-Mail і/або пароль!';

@@ -1,7 +1,7 @@
 <?php
 
 // Heading
-$_['heading_title']    = 'Виробники';
+$_['heading_title']    = 'Бренди';
 
 // Text
 $_['text_extension']   = 'Доповнення';

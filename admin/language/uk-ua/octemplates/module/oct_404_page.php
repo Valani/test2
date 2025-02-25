@@ -13,7 +13,7 @@ $_['entry_name']			= 'Заголовок сторінки:';
 $_['entry_status']			= 'Статус:';
 $_['entry_text']			= 'Текст:';
 $_['entry_category']		= 'Категорії:';
-$_['entry_manufacturer']	= 'Виробники:';
+$_['entry_manufacturer']	= 'Бренди:';
 $_['entry_product']			= 'Товари:';
 $_['entry_image']			= 'Зображення:';
 

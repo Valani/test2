@@ -49,6 +49,7 @@ $_['entry_firstname']       = 'Ім&#39я';
 $_['entry_lastname']        = 'Прізвище';
 $_['entry_email']           = 'E-Mail';
 $_['entry_telephone']       = 'Телефон';
+$_['entry_allowed_ips']     = 'Дозволені IP';
 $_['entry_fax']             = 'Факс';
 $_['entry_newsletter']      = 'Розсилка';
 $_['entry_status']          = 'Статус';

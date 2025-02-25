@@ -408,7 +408,6 @@ textarea.ocf-form-control:focus {
   text-transform: none;
   padding: 0;
   line-height: 1.5;
-  height: auto!important;
   margin-bottom: 6px;
   text-transform: none;
   background: transparent;
@@ -540,6 +539,7 @@ textarea.ocf-form-control:focus {
 /* SEO PAGES */   
 .ocf-page-list-top,
 .ocf-page-list-bottom {
+  overflow: hidden;
   position: relative;
   z-index: 3;
 }

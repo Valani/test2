@@ -1,12 +1,12 @@
 <?php
 
 // Heading
-$_['heading_title']     = 'Акції';
+$_['heading_title']     = 'Нові надходження';
 
 // Text
-$_['text_empty']        = 'Немає спеціальних пропозицій';
+$_['text_empty']        = 'Немає нових надходжень';
 $_['text_quantity']     = 'Кількість:';
-$_['text_manufacturer'] = 'Виробник:';
+$_['text_manufacturer'] = 'Бренд:';
 $_['text_model']        = 'Код товару:';
 $_['text_points']       = 'Бонусні бали:';
 $_['text_price']        = 'Ціна:';

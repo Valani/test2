@@ -14,7 +14,7 @@ $_['text_weight']                   = 'Вага';
 $_['text_width']                    = 'Ширина';
 $_['text_length']                   = 'Довжина';
 $_['text_height']                   = 'Висота';
-$_['text_manufacturer']             = 'Виробник';
+$_['text_manufacturer']             = 'Бренд';
 $_['text_selected']                 = '%s + <span class="ocf-more-selected" data-ocf="popover" data-content="%s">%s</span>';
 $_['text_stock']                    = 'Наявність';
 $_['text_in_stock']                 = 'Є в наявності';

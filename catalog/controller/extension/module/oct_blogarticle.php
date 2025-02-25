@@ -29,9 +29,6 @@ class ControllerExtensionModuleOCTBlogArticle extends Controller {
 		$this->load->model('octemplates/blog/oct_blogcategory');
 		$this->load->model('tool/image');
 
-		$this->document->addScript('catalog/view/theme/oct_showcase/js/slick/slick.min.js');
-		$this->document->addStyle('catalog/view/theme/oct_showcase/js/slick/slick.min.css');
-
 		$data['oct_lazyload'] = false;
 
 		$data['oct_lazy_image'] = $this->config->get('theme_oct_showcase_lazyload_image') ? $this->model_tool_image->resize($this->config->get('theme_oct_showcase_lazyload_image'), 30, 30) : '/image/catalog/showcase/lazy-image.svg';

@@ -17,6 +17,7 @@ $_['text_agree']           = 'Я погоджуюсь з умовами <a href=
 $_['entry_customer_group'] = 'Група покупців';
 $_['entry_firstname']      = 'Ім&#39я';
 $_['entry_lastname']       = 'Прізвище';
+$_['entry_google_in']            = 'Увійти через Google';
 $_['entry_email']          = 'E-Mail';
 $_['entry_telephone']      = 'Телефон';
 $_['entry_fax']            = 'Факс';

@@ -64,7 +64,7 @@ $_['compare_text']                          = 'До порівняння';
 $_['wishlist_text_in']                      = 'У закладках';
 $_['wishlist_text']                         = 'В закладки';
 $_['cart_text_in']                          = 'У кошику';
-$_['cart_text']                             = 'До кошика';
+$_['cart_text']                             = 'Купити';
 $_['oct_wishlist']                          = 'Закладки';
 $_['oct_pricelist']                         = 'Прайс-лист';
 $_['oct_addcart']                           = 'Додати у кошик';
@@ -77,7 +77,7 @@ $_['compare_remove_success']                = 'Товар <a href="%s">%s</a> в
 // Product page text
 $_['oct_product_description']               = 'Опис';
 $_['oct_product_reviews']     				= 'Відгуки:';
-$_['oct_product_cheaper']     				= 'Знайшли дешевше?';
+$_['oct_product_cheaper']     				= 'Не знайшли потрібну запчастину?';
 $_['oct_product_attributes']     			= 'Характеристики:';
 $_['oct_product_attributes_seeall']     	= '(Дивитись усі)';
 $_['oct_product_attributes_tab']     		= 'Характеристики';

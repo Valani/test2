@@ -1,7 +1,7 @@
 <?php
 
 // Heading
-$_['heading_title']    = 'Безкоштовна доставка';
+$_['heading_title']    = 'Доставка у відділення SAT';
 
 // Text
 $_['text_shipping']    = 'Доставка';

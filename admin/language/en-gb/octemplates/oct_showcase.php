@@ -43,7 +43,6 @@ $_['text_oct_modification_manager']      = 'Modification manager';
 $_['text_module']      					 = 'Modules';
 $_['text_oct_popup_purchase']       	 = 'Quick order';
 $_['text_menu_oct_fastorder']            = 'Checkout';
-$_['text_menu_oct_smartcheckout']        = 'Smart Checkout';
 $_['text_oct_404_page']       	 		 = 'Page 404';
 $_['text_oct_policy']       	 		 = 'Cookie policy';
 $_['text_oct_information_bar']       	 = 'Information bar';

@@ -290,7 +290,6 @@ body { min-height: 100%!important; /*height: -webkit-fill-available;*/ }
 }
 
 .ocf-btn-mobile-static {
-  display: block!important;
   text-align: right;
   margin-bottom: 15px;
   border-bottom: 1px solid #eee;

@@ -12,12 +12,12 @@ $_['button_save'] = 'Сохранить';
 $_['button_show_all'] = 'Показать все';
 
 // Text
+$_['text_faq'] = 'FAQ';
+$_['text_documentation'] = 'Документация';
+$_['text_list']              = 'Список фильтров';
 $_['text_all']               = '-- Все --';
 $_['text_all_values']        = '-- Все значения --';
 $_['text_without_category']  = '-- Без категории --';
-$_['text_list']              = 'Список фильтров';
-$_['text_faq'] = 'FAQ';
-$_['text_documentation'] = 'Документация';
 $_['text_group']               = '<i class="fa fa-object-group" data-toggle="popover" data-placement="top" data-content="Группировать все значения в одно"></i>';
 $_['text_select_all']        = 'Выбрать все';
 $_['text_success']           = 'Фильтр обновлен!';

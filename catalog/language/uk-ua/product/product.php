@@ -2,14 +2,15 @@
 
 // Text
 $_['text_search']              = 'Пошук';
-$_['text_brand']               = 'Виробник';
-$_['text_manufacturer']        = 'Виробник:';
+$_['text_brand']               = 'Бренд';
+$_['text_manufacturer']        = 'Бренд:';
 $_['text_model']               = 'Код товару:';
 $_['text_reward']              = 'Бонусні бали:';
 $_['text_points']              = 'Ціна в бонусних балах:';
 $_['text_stock']               = 'Наявність:';
 $_['text_instock']             = 'В наявності';
 $_['text_tax']                 = 'Без ПДВ:';
+$_['button_cart']                 = 'Купити';
 $_['text_discount']            = ' або більше ';
 $_['text_option']              = 'Доступні варіанти';
 $_['text_minimum']             = 'Мінімальна кількість замовлення цього товару <b>%s</b>';
@@ -32,6 +33,7 @@ $_['text_semi_month']          = 'Півмісяця';
 $_['text_month']               = 'Місяць';
 $_['text_year']                = 'Рік';
 $_['text_benefits']            = 'Переваги:';
+$_['text_not_stock']            = 'Під замовлення';
 
 // Entry
 $_['entry_qty']                = 'Кількість';

@@ -21,10 +21,7 @@
 </div>
 {% if oct_byoneclick_mask is defined and oct_byoneclick_mask %}
 <script>
-$('#oct_purchase_byoneclick_form{{ oct_byoneclick_page }} .one_click_input').inputmask({
-	mask: '{{ oct_byoneclick_mask }}',
-	clearMaskOnLostFocus: false
-});
+scInputMask ('#oct_purchase_byoneclick_form{{ oct_byoneclick_page }} .one_click_input', '{{ oct_byoneclick_mask }}');
 </script>
 {% endif %}
 <script>

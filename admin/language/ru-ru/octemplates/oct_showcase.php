@@ -19,7 +19,6 @@ $_['text_oct_blogsettings']              = 'Настройки блога';
 $_['text_oct_popup_call_phone']          = 'Обратный звонок';
 $_['text_oct_fastorder']                 = 'Быстрое оформление заказа';
 $_['text_menu_oct_fastorder']            = 'Оформление заказа';
-$_['text_menu_oct_smartcheckout']        = 'Smart Checkout оформление заказа';
 $_['text_oct_megamenu']                  = 'Мегаменю';
 $_['text_oct_advanced_options_settings'] = 'Опции магазина';
 $_['text_oct_advanced_attributes_settings'] = 'Атрибуты магазина';

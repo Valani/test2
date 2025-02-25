@@ -1,8 +1,8 @@
 <?php
 // Text
 $_['text_search']                             = 'Пошук';
-$_['text_brand']                              = 'Виробник';
-$_['text_manufacturer']                       = 'Виробник:';
+$_['text_brand']                              = 'Бренд';
+$_['text_manufacturer']                       = 'Бренд:';
 $_['text_model']                              = 'Модель:';
 $_['text_reward']                             = 'Бонусні бали:';
 $_['text_points']                             = 'Ціна в бонусних балах:';

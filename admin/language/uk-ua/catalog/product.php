@@ -36,7 +36,7 @@ $_['text_points']            = 'Нарахування бонусних балі
 $_['text_percent']           = 'Відсоток';
 $_['text_amount']            = 'Фіксована сума';
 $_['text_none_category']            	= ' --- Без категорії --- ';
-$_['text_none_manufacturer']            = ' --- Без виробника --- ';
+$_['text_none_manufacturer']            = ' --- Без бренду --- ';
 $_['text_plus']              = '+';
 $_['text_minus']             = '-';
 
@@ -51,7 +51,7 @@ $_['column_entry']           = 'Назва товару';
 $_['column_variant']         = 'Варіант';
 $_['column_action']          = 'Дія';
 $_['column_category']        = 'Категорія';
-$_['column_manufacturer']    = 'Виробник';
+$_['column_manufacturer']    = 'Бренд';
 $_['column_noindex']         = 'Індексація';
 
 // Entry
@@ -65,6 +65,7 @@ $_['entry_meta_description'] = 'Мета-тег Description';
 $_['entry_store']            = 'Магазини';
 $_['entry_keyword']          = 'SEO URL';
 $_['entry_model']            = 'Код товару';
+$_['entry_id_1c']            = '1C код товару';
 $_['entry_sku']              = 'SKU';
 $_['entry_upc']              = 'UPC';
 $_['entry_ean']              = 'EAN';
@@ -73,7 +74,7 @@ $_['entry_isbn']             = 'ISBN';
 $_['entry_mpn']              = 'MPN';
 $_['entry_location']         = 'Розташування';
 $_['entry_shipping']         = 'Необхідна доставка';
-$_['entry_manufacturer']     = 'Виробник';
+$_['entry_manufacturer']     = 'Бренд';
 $_['entry_date_available']   = 'Дата надходження';
 $_['entry_quantity']         = 'Кількість';
 $_['entry_minimum']          = 'Мінімальна кількість';
@@ -122,12 +123,12 @@ $_['entry_max']              = 'До';
 
 // Help
 $_['help_keyword']           = 'Має бути унікальним на всю систему, без пробілів та спецсимволів';
-$_['help_sku']               = 'SKU - код виробника';
+$_['help_sku']               = 'SKU - код бренду';
 $_['help_upc']               = 'Універсальний код товару';
 $_['help_ean']               = 'Європейський код товару';
 $_['help_jan']               = 'Японський код товару';
 $_['help_isbn']              = 'Міжнародний стандартний книжковий номер';
-$_['help_mpn']               = 'Код партії товару виробника';
+$_['help_mpn']               = 'Код партії товару бренду';
 $_['help_manufacturer']      = '(Автодоповнення)';
 $_['help_minimum']           = 'Мінімальна кількість товару для замовлення';
 $_['help_stock_status']      = 'Статус, що показується коли товару немає в наявності (кількість = 0)';

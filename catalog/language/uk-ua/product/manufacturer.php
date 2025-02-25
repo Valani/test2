@@ -1,15 +1,15 @@
 <?php
 
 // Heading
-$_['heading_title']     = 'Виробники';
+$_['heading_title']     = 'Бренди';
 
 // Text
-$_['text_brand']        = 'Виробник';
+$_['text_brand']        = 'Бренд';
 $_['text_index']        = 'Алфавітний покажчик';
-$_['text_error']        = 'Виробника не знайдено';
-$_['text_empty']        = 'Товари обраного виробника відсутні';
+$_['text_error']        = 'Бренд не знайдено';
+$_['text_empty']        = 'Товари обраного бренду відсутні';
 $_['text_quantity']     = 'Кількість:';
-$_['text_manufacturer'] = 'Виробник:';
+$_['text_manufacturer'] = 'Бренд:';
 $_['text_model']        = 'Код товару:';
 $_['text_points']       = 'Бонусні бали:';
 $_['text_price']        = 'Ціна:';

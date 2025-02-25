@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']         = 'Octemplates - Бестселери у категоріях та виробниках';
+$_['heading_title']         = 'Octemplates - Бестселери у категоріях та брендах';
 
 // Text
 $_['text_module']           = 'Модулі';

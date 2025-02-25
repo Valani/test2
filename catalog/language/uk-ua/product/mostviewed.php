@@ -6,7 +6,7 @@ $_['heading_title']     = 'Популярні товари';
 // Text
 $_['text_empty']        = 'Немає популярних товарів.';
 $_['text_quantity']     = 'Кількість:';
-$_['text_manufacturer'] = 'Виробник:';
+$_['text_manufacturer'] = 'Бренд:';
 $_['text_model']        = 'Модель:'; 
 $_['text_points']       = 'Бонусні бали:'; 
 $_['text_price']        = 'Ціна:'; 

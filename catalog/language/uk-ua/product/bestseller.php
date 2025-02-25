@@ -6,7 +6,7 @@ $_['heading_title']     = 'Хіти продажу';
 // Text
 $_['text_empty']        = 'Немає Хитів продажу';
 $_['text_quantity']     = 'Кільк.:';
-$_['text_manufacturer'] = 'Виробник:';
+$_['text_manufacturer'] = 'Бренд:';
 $_['text_model']        = 'Код товару:';
 $_['text_points']       = 'Бонусні бали:';
 $_['text_price']        = 'Ціна:';

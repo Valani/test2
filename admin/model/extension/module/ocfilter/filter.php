@@ -736,7 +736,7 @@ class ModelExtensionModuleOCFilterFilter extends Model {
       $sort = 'md.name';
     }
 
-    $sql .= " GROUP BY m.manufacturer_id ORDER BY " . $sort;
+    $sql .= " ORDER BY " . $sort;
 
     if (isset($data['order']) && ($data['order'] == 'DESC')) {
       $sql .= " DESC";

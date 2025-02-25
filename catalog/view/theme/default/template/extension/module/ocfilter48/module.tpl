@@ -17,7 +17,7 @@
         <button type="button" data-ocf-discard="*" class="ocf-btn ocf-btn-link ocf-disabled" disabled="disabled"><?php echo $button_cancel_all; ?></button>
         <?php } ?>         
         <?php if ($search_button) { ?>
-        <button type="button" class="ocf-btn ocf-btn-link ocf-disabled" data-ocf="button" data-loading-text="<?php echo $text_loading_ocf; ?>" disabled="disabled"><?php echo $button_select; ?></button>
+        <button type="button" class="ocf-btn ocf-btn-link ocf-disabled" data-ocf="button" data-loading-text="<?php echo $text_loading; ?>" disabled="disabled"><?php echo $button_select; ?></button>
         <?php } ?>        
       </div>   
       <?php } ?>  
@@ -43,7 +43,7 @@
         <button type="button" data-ocf-discard="*" class="ocf-btn ocf-btn-link ocf-disabled" disabled="disabled"><?php echo $button_cancel_all; ?></button>
         <?php } ?>        
         <?php if ($search_button) { ?>
-        <button type="button" class="ocf-btn ocf-disabled ocf-btn-block ocf-search-btn-static" data-ocf="button" data-loading-text="<?php echo $text_loading_ocf; ?>" disabled="disabled"><?php echo $button_select; ?></button>
+        <button type="button" class="ocf-btn ocf-disabled ocf-btn-block ocf-search-btn-static" data-ocf="button" data-loading-text="<?php echo $text_loading; ?>" disabled="disabled"><?php echo $button_select; ?></button>
         <?php } ?>        
       </div>
     </div>            
@@ -62,7 +62,7 @@
   <?php } ?> 
   
   <div class="ocf-hidden">
-    <button class="ocf-btn ocf-search-btn-popover" data-ocf="button" data-loading-text="<?php echo $text_loading_ocf; ?>"><?php echo $button_select; ?></button>
+    <button class="ocf-btn ocf-search-btn-popover" data-ocf="button" data-loading-text="<?php echo $text_loading; ?>"><?php echo $button_select; ?></button>
   </div>
   
 <script>
@@ -112,8 +112,6 @@ var startOCFilter = function() {
   
   <?php if ($index < 2) { ?>
   loadScript('<?php echo $javascript; ?>', init);
-  <?php } else { ?>
-  init();
   <?php } ?> 
 };
 

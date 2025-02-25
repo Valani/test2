@@ -144,8 +144,6 @@ $_['error_permission']       = 'You do not have permission to change SEO pages!'
 $_['error_name']             = 'SEO page name must be up to %s characters!';
 $_['error_heading_title']    = 'The title of the SEO page must be between %s and %s characters!';
 $_['error_meta_title']       = 'Meta title must be between %s and %s characters!';
-$_['error_meta_keyword']     = 'Meta keyword must be up to %s characters!';
-$_['error_meta_description'] = 'Meta description must be up to %s characters!';
 $_['error_keyword_exist']   = 'The specified SEO URL alias is already in use';
 $_['error_keyword_exist_page_id'] = '<a href="%s" target="_blank">SEO page</a>';
 $_['error_keyword_exist_category_id'] = '<a href="%s" target="_blank">category</a>';
@@ -159,4 +157,3 @@ $_['error_target_empty']     = 'No pages found for the selected conditions';
 $_['error_replace_text'] = 'Please enter the text you are looking for';
 $_['error_add_text'] = 'Please enter the added text';
 $_['error_add_text_position'] = 'Please enter a position search text';
-$_['error_batch_edit_something'] = 'Something went wrong';

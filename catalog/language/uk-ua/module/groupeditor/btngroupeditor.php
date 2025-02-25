@@ -2,7 +2,7 @@
 
 $_['pge_text_admin_setting']  	 		= 'Налаштування модуля';
 $_['pge_text_description']       		= 'Загальні';
-$_['pge_text_categories']        		= 'Виробник, Категорії';
+$_['pge_text_categories']        		= 'Бренд, Категорії';
 $_['pge_text_images_product']  	 		= 'Зображення товару';
 $_['pge_text_images_product_url']  		= 'Зображення товару по url';
 $_['pge_text_price']				 	= 'Ціна';
@@ -37,7 +37,7 @@ $_['pge_text_opt_date_status']  		= 'Дата надходження, Стату
 $_['pge_text_opt_stockshipping']  		= 'Склад, Доставка, Відсутність на складі';
 $_['pge_text_opt_weightdimensions'] 	= 'Розміри, Вага';
 $_['pge_text_opt_links'] 				= 'Зв&#39язки товару';
-$_['pge_text_opt_manufacturer'] 		= 'Виробник';
+$_['pge_text_opt_manufacturer'] 		= 'Бренд';
 $_['pge_text_opt_category'] 			= 'Категорії';
 $_['pge_text_opt_filter'] 				= 'Фільтр';
 $_['pge_text_opt_related'] 				= 'Рекомендовані товари';

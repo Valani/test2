@@ -16,6 +16,8 @@ $_['text_forgotten']               = 'Забули пароль?';
 // Entry
 $_['entry_email']                  = 'E-Mail адреса';
 $_['entry_password']               = 'Пароль';
+$_['entry_google_in']            = 'Увійти через Google';
+$_['entry_abo']            = 'або';
 
 // Error
 $_['error_login']                  = 'Не знайдена адреса E-Mail або невірно вказаний пароль';

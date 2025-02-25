@@ -43,7 +43,6 @@ $_['text_oct_modification_manager']      = 'Менеджер модифікат�
 $_['text_module']      					 = 'Модулі';
 $_['text_oct_popup_purchase']       	 = 'Швидке замовлення';
 $_['text_menu_oct_fastorder']            = 'Оформлення замовлення';
-$_['text_menu_oct_smartcheckout']        = 'Smart Checkout оформлення замовлення';
 $_['text_oct_404_page']       	 		 = 'Сторінка 404';
 $_['text_oct_policy']       	 		 = 'Політика cookie';
 $_['text_oct_information_bar']       	 = 'Інформаційна смуга';

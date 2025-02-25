@@ -29,7 +29,7 @@ $_['text_new']  		   		  = 'Додати';
 $_['text_new_category']    		  = 'Категорію';
 $_['text_new_customer']    		  = 'Покупця';
 $_['text_new_download']           = 'Завантаження';
-$_['text_new_manufacturer']		  = 'Виробника';
+$_['text_new_manufacturer']		  = 'Бренду';
 $_['text_new_product']     		  = 'Товар';
 
 $_['button_clearallcache']        = 'Видалити весь кеш';

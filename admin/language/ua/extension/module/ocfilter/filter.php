@@ -47,7 +47,7 @@ $_['text_source_option']              = 'Опція товару';
 $_['text_confirm_delete_filter']  = '<p>Ви дійсно хочете видалити вибрані фільтри?</p><div class=\'text-right\'><button type=\'button\' data-dismiss=\'popover\' class=\'btn btn-default\'>Hі</button> <button type=\'button\' onclick=\'$(`#form-list`).submit()\' class=\'btn btn-danger\'>Так</button></div>';
 
 $_['text_price'] = 'Ціна';
-$_['text_manufacturer'] = 'Виробник';
+$_['text_manufacturer'] = 'Бренд';
 $_['text_stock_status'] = 'Наявність';
 $_['text_in_stock'] = 'Є в наявності';
 $_['text_out_of_stock'] = 'Немає в наявності';

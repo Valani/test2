@@ -1,7 +1,7 @@
 <?php
 
 // Heading
-$_['heading_title']					= 'Оплата при доставці';
+$_['heading_title']					= 'Готівкою';
 
 // Text
 $_['text_payment']					= 'Оплата';

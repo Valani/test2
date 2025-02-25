@@ -73,11 +73,6 @@ const OCF_PREFIX = 'ocf';
     
     this.options = $.extend({}, OCFilter.DEFAULTS, options);
     
-    // Set host
-    if ($isSet('base') && $('base').attr('href').length) {
-      this.options.urlHost = $('base').attr('href');
-    }    
-    
     this.paramsDecodeCache = {};
     this.paramsEncodeCache = {};
     
@@ -291,13 +286,13 @@ const OCF_PREFIX = 'ocf';
       });
     }
     
-    this.$button.add(this.$element.find('.ocf-module-page-list a')).on('mousedown', function(e) {
+    this.$button.on('mousedown', function(e) {
       if (that.isMobile()) {
         localStorage.setItem(OCF_PREFIX + '.mobile.opened', -1); 
       } else if ('undefined' != typeof localStorage) {
         localStorage.removeItem(OCF_PREFIX + '.mobile.opened'); 
       }
-    });     
+    });    
           
     // Search
     this.$element.on('click.' + OCF_PREFIX, function(e) {

@@ -1,5 +1,5 @@
 <?php
 
 // Text
-$_['text_title']       = 'Безкоштовна доставка';
-$_['text_description'] = 'Безкоштовна доставка';
+$_['text_title']       = 'Доставка у відділення SAT';
+$_['text_description'] = 'Доставка у відділення SAT';
