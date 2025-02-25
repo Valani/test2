@@ -49,7 +49,7 @@
         </label>          
         <div class="input-group-addon"><i class="fa fa-bars"></i></div>
       </div>            
-      <div class="alert alert-success mb-0" id="copy-attribute-id" style="height: 150px; overflow: auto;">
+      <div class="alert alert-success mb-0" id="copy-attribute-group-id" style="height: 150px; overflow: auto;">
         {% for attribute_group_id, name in copy_attribute_group_id %}
         <div id="copy-attribute-{{ attribute_group_id }}">
           <i class="fa fa-fw fa-minus-circle" onclick="$(this).parent().remove();"></i> {{ name }}
@@ -396,6 +396,8 @@ $(function() {
   var timer, copyDone = false, copySuccess = false, copyHash;
 
   function checkLog() {
+    $('#copy-log').get(0).scrollTop = 9999;
+    
     if (copyDone) {
       return;
     }

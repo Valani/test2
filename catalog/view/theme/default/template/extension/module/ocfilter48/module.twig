@@ -17,7 +17,7 @@
         <button type="button" data-ocf-discard="*" class="ocf-btn ocf-btn-link ocf-disabled" disabled="disabled">{{ button_cancel_all }}</button>
         {% endif %}         
         {% if search_button %}
-        <button type="button" class="ocf-btn ocf-btn-link ocf-disabled" data-ocf="button" data-loading-text="{{ text_loading }}" disabled="disabled">{{ button_select }}</button>
+        <button type="button" class="ocf-btn ocf-btn-link ocf-disabled" data-ocf="button" data-loading-text="{{ text_loading_ocf }}" disabled="disabled">{{ button_select }}</button>
         {% endif %}        
       </div>   
       {% endif %}  
@@ -43,7 +43,7 @@
         <button type="button" data-ocf-discard="*" class="ocf-btn ocf-btn-link ocf-disabled" disabled="disabled">{{ button_cancel_all }}</button>
         {% endif %}        
         {% if search_button %}
-        <button type="button" class="ocf-btn ocf-disabled ocf-btn-block ocf-search-btn-static" data-ocf="button" data-loading-text="{{ text_loading }}" disabled="disabled">{{ button_select }}</button>
+        <button type="button" class="ocf-btn ocf-disabled ocf-btn-block ocf-search-btn-static" data-ocf="button" data-loading-text="{{ text_loading_ocf }}" disabled="disabled">{{ button_select }}</button>
         {% endif %}        
       </div>
     </div>            
@@ -62,7 +62,7 @@
   {% endif %} 
   
   <div class="ocf-hidden">
-    <button class="ocf-btn ocf-search-btn-popover" data-ocf="button" data-loading-text="{{ text_loading }}">{{ button_select }}</button>
+    <button class="ocf-btn ocf-search-btn-popover" data-ocf="button" data-loading-text="{{ text_loading_ocf }}">{{ button_select }}</button>
   </div>
   
 <script>
@@ -112,6 +112,8 @@ var startOCFilter = function() {
   
   {% if index < 2 %}
   loadScript('{{ javascript }}', init);
+  {% else %}
+  init();
   {% endif %}
 };
 

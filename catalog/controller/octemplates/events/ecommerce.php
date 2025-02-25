@@ -7,7 +7,7 @@
 
 class ControllerOCTemplatesEventsEcommerce extends Controller {
 
-    public function setData(&$route, &$data) {
+    public function setOctEcommerceData(&$route, &$data) {
         if (isset($this->session->data['order_id'])) {
             $analytics_status = $this->config->get('analytics_oct_analytics_status');
             $analytics_google_ecommerce = $this->config->get('analytics_oct_analytics_google_ecommerce');
@@ -143,7 +143,7 @@ class ControllerOCTemplatesEventsEcommerce extends Controller {
     }
 
 
-    public function getData(&$route, &$data) {
+    public function getOctEcommerceData(&$route, &$data) {
 
         $ecommerce_data = $this->config->get('oct_success_order');
         

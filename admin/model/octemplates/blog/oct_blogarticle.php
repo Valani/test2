@@ -193,6 +193,7 @@ class ModelOCTemplatesBlogOCTBlogArticle extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_image WHERE blogarticle_id = '" . (int)$blogarticle_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_related WHERE blogarticle_id = '" . (int)$blogarticle_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_related WHERE related_id = '" . (int)$blogarticle_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_related_product WHERE blogarticle_id = '" . (int)$blogarticle_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_to_category WHERE blogarticle_id = '" . (int)$blogarticle_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_to_layout WHERE blogarticle_id = '" . (int)$blogarticle_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "oct_blogarticle_to_store WHERE blogarticle_id = '" . (int)$blogarticle_id . "'");

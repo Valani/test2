@@ -267,12 +267,6 @@ class ControllerSettingSetting extends Controller {
 			$data['config_fax'] = $this->config->get('config_fax');
 		}
 
-        if (isset($this->request->post['config_catinall'])) {
-			$data['config_catinall'] = $this->request->post['config_catinall'];
-		} else {
-			$data['config_catinall'] = $this->config->get('config_catinall');
-		}
-
 		if (isset($this->request->post['config_image'])) {
 			$data['config_image'] = $this->request->post['config_image'];
 		} else {

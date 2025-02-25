@@ -22,7 +22,7 @@
   <?php if ($button_show_more_filters) { ?>
   <?php if ($layout == 'horizontal') { ?>
   <div class="ocf-btn-block ocf-text-center">
-    <button type="button" class="ocf-btn ocf-btn-link ocf-btn-show-filters" data-ocf="collapse" data-target="#ocf-hidden-filters-<?php echo $index; ?>" data-loading-text="<?php echo $text_loading; ?>" aria-expanded="false"> 
+    <button type="button" class="ocf-btn ocf-btn-link ocf-btn-show-filters" data-ocf="collapse" data-target="#ocf-hidden-filters-<?php echo $index; ?>" data-loading-text="<?php echo $text_loading_ocf; ?>" aria-expanded="false"> 
       <span class="ocf-hide-expand-1"><?php echo $button_show_more_filters; ?> <i class="ocf-icon ocf-angle ocf-angle-down"></i></span>
       <span class="ocf-hide-expand-0"><?php echo $button_hide; ?> <i class="ocf-icon ocf-angle ocf-angle-up"></i></span>  
     </button>   
@@ -36,7 +36,7 @@
     </div>    
   </div>
   <?php if ($layout == 'vertical') { ?>
-  <button type="button" class="ocf-btn ocf-btn-block ocf-btn-show-filters" data-ocf="collapse" data-target="#ocf-hidden-filters-<?php echo $index; ?>" data-loading-text="<?php echo $text_loading; ?>" aria-expanded="false"> 
+  <button type="button" class="ocf-btn ocf-btn-block ocf-btn-show-filters" data-ocf="collapse" data-target="#ocf-hidden-filters-<?php echo $index; ?>" data-loading-text="<?php echo $text_loading_ocf; ?>" aria-expanded="false"> 
     <span class="ocf-hide-expand-1"><?php echo $button_show_more_filters; ?> <i class="ocf-icon ocf-angle ocf-angle-down"></i></span>
     <span class="ocf-hide-expand-0"><?php echo $button_hide; ?> <i class="ocf-icon ocf-angle ocf-angle-up"></i></span>  
   </button>

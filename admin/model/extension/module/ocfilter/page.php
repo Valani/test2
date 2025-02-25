@@ -182,6 +182,44 @@ class ModelExtensionModuleOCFilterPage extends Model {
       return true;
     }
   
+    // Edit/Add keywords
+    if ($data['edit_action'] != 'update' && ($data['edit_destination'] == 'keyword' || $data['edit_destination'] == 'all')) {
+      $keyword_sql = "";
+      
+      if ($data['edit_action'] == 'replace') {
+        $keyword_sql = "REPLACE(keyword, '" . $this->db->escape($data['edit_text_1']) . "', '" . $this->db->escape($data['edit_text_2']) . "')";
+      } else if ($data['edit_action'] == 'add') {
+        if ($data['edit_position'] == 'prepend') {
+          $keyword_sql = "CONCAT('" . $this->db->escape($data['edit_text_1']) . "', keyword)";
+        } else if ($data['edit_position'] == 'append') {
+          $keyword_sql = "CONCAT(keyword, '" . $this->db->escape($data['edit_text_1']) . "')";
+        }
+      }        
+      
+      if ($keyword_sql) {
+        $results = $this->getPages($data);
+             
+        if ($this->ocfilter->opencart->version >= 30) {
+          foreach ($results as $result) {
+            $this->db->query("UPDATE " . DB_PREFIX . "seo_url SET keyword = " . $keyword_sql . " WHERE `query` = 'ocfilter_page_id=" . (int)$result['page_id'] . "'");
+          }
+        } else {
+          foreach ($results as $result) {
+            $this->db->query("UPDATE " . DB_PREFIX . "url_alias SET keyword = " . $keyword_sql . " WHERE `query` = 'ocfilter_page_id=" . (int)$result['page_id'] . "'");
+          }     
+        }
+                 
+        $this->cache->delete('seo_pro');
+        $this->cache->delete('seopro.keywords');
+        $this->cache->delete('seopro.queries');       
+      }
+      
+      if ($data['edit_destination'] == 'keyword') {
+        return true;
+      }
+    }
+      
+    // Other data update
     $sql = "UPDATE " . DB_PREFIX . "ocfilter_page op INNER JOIN " . DB_PREFIX . "ocfilter_page_description opd ON (op.page_id = opd.page_id)";
        
     $implode = [];
@@ -210,7 +248,7 @@ class ModelExtensionModuleOCFilterPage extends Model {
       if (isset($data['edit_sitemap']) && $data['edit_sitemap'] != '*') {
         $implode[] = "op.sitemap = '" . (int)$data['edit_sitemap'] . "'";
       }    
-    } else { 
+    } else {
       $destination_columns = [
         'opd.`name`',             'opd.`heading_title`', 
         'opd.`meta_title`',       'opd.`description_top`', 'opd.`description_bottom`', 
@@ -265,39 +303,6 @@ class ModelExtensionModuleOCFilterPage extends Model {
     }
                
     $this->db->query($sql);
-    
-    // Edit/Add keywords
-    if ($data['edit_action'] != 'update' && ($data['edit_destination'] == 'keyword' || $data['edit_destination'] == 'all')) {
-      $keyword_sql = "";
-      
-      if ($data['edit_action'] == 'replace') {
-        $keyword_sql = "REPLACE(keyword, '" . $this->db->escape($data['edit_text_1']) . "', '" . $this->db->escape($data['edit_text_2']) . "')";
-      } else if ($data['edit_action'] == 'add') {
-        if ($data['edit_position'] == 'prepend') {
-          $keyword_sql = "CONCAT('" . $this->db->escape($data['edit_text_1']) . "', keyword)";
-        } else if ($data['edit_position'] == 'append') {
-          $keyword_sql = "CONCAT(keyword, '" . $this->db->escape($data['edit_text_1']) . "')";
-        }
-      }        
-      
-      if ($keyword_sql) {
-        $results = $this->getPages($data);
-             
-        if ($this->ocfilter->opencart->version >= 30) {
-          foreach ($results as $result) {
-            $this->db->query("UPDATE " . DB_PREFIX . "seo_url SET keyword = " . $keyword_sql . " WHERE `query` = 'ocfilter_page_id=" . (int)$result['page_id'] . "'");
-          }
-        } else {
-          foreach ($results as $result) {
-            $this->db->query("UPDATE " . DB_PREFIX . "url_alias SET keyword = " . $keyword_sql . " WHERE `query` = 'ocfilter_page_id=" . (int)$result['page_id'] . "'");
-          }     
-        }
-                 
-        $this->cache->delete('seo_pro');
-        $this->cache->delete('seopro.keywords');
-        $this->cache->delete('seopro.queries');       
-      }
-    }
     
     $this->ocfilter->cache->delete('ocfilter.page');
     

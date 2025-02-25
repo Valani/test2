@@ -203,12 +203,13 @@ class ControllerExtensionDashboardDomovoy extends Controller
 
             $cache = $this->config->get('domovoy_folders_' . $key);
 
-            $time = $this->date_diff(date('Y-m-d H:i'), $cache['date']);
-            if ($cron[$key]['status'] && $time > $cron_time) {
-                $this->calc($key);
-            }
-
             if ($cache) {
+				
+				$time = $this->date_diff(date('Y-m-d H:i'), $cache['date']);
+				if ($cron[$key]['status'] && $time > $cron_time) {
+					$this->calc($key);
+				}
+				
                 $data['folders'][$key]['size'] = sprintf($this->language->get('text_folder_size'), $cache['unit']['size'] . " " . $cache['unit']['unit']);
                 if ($cache['size'] > $folder_size && $folder_size != 0) {
                     $data['folders'][$key]['warning_size'] = sprintf($this->language->get('text_warning_size'), $cron[$key]['size']);

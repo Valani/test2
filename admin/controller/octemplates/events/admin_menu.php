@@ -151,6 +151,14 @@ class ControllerOCTemplatesEventsAdminMenu extends Controller {
 
         $modules = [];
 
+        if ($this->user->hasPermission('access', 'octemplates/module/oct_smart_checkout')) {
+            $modules[] = [
+                'name'	   => $this->language->get('text_menu_oct_smartcheckout'),
+                'href'     => $this->url->link('octemplates/module/oct_smart_checkout', 'user_token=' . $this->session->data['user_token'], true),
+                'children' => []
+            ];
+        }
+
         if ($this->user->hasPermission('access', 'octemplates/module/oct_popup_view')) {
             $modules[] = [
                 'name'	   => $this->language->get('text_oct_popup_view'),

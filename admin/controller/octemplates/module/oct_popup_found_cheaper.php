@@ -221,7 +221,7 @@ class ControllerOCTemplatesModuleOctPopupFoundCheaper extends Controller {
 				'email' => 0,
                 'comment' => '1',
                 'link' => '2',
-                'mask' => '8 (999) 999-99-99'
+                'mask' => '+38 (999) 999-99-99'
             ]
         ]);
         

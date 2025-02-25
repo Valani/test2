@@ -116,7 +116,7 @@ $(function() {
           $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-bars');
         
           json.unshift({
-            name: '{{ text_all }}',
+            name: '<?php echo addslashes($text_all); ?>',
             category_id: 0
           });
 
@@ -151,7 +151,7 @@ $(function() {
   $('[data-ocf="category"]').on('click', function(e) {
     $('#modal-category-list').remove();
 
-    $.get(ocfilter.link('extension/module/ocfilter/filter/modalCategory', 'filter_key={{ filter_key }}&target=filter-category'), {}, function(response) {
+    $.get(ocfilter.link('extension/module/ocfilter/filter/modalCategory', 'filter_key=<?php echo $filter_key; ?>&target=filter-category'), {}, function(response) {
       if (response) {
         $('body').append(response);
 

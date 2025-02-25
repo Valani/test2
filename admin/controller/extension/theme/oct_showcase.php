@@ -9,7 +9,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 	private $error = [];
 	private $gretret = [];
 	private $oct_theme = 'oct_showcase';
-	private $version = '1.8';
+	private $version = '1.9.1';
 
 	public function index() {
 		$this->load->language('octemplates/theme/'. $this->oct_theme);
@@ -91,7 +91,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
             $this->document->setTitle($theme_title);
         }
 
-		if(($this->{$this->_1481607973(0)}->{$this->_1481607973(1)}[$this->_1481607973(2)]==$this->_1481607973(3))&&$this->{$this->_1908729617(0)}()){if(isset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)])&&!empty($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)])){$this->{$this->_1481607973(6)}->{$this->_1481607973(7)}($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)]);unset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)]);}else{$this->{$this->_1481607973(6)}->{$this->_1481607973(7)}([]);}if(isset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)])&&!empty($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)])){$this->{$this->_1481607973(6)}->{$this->_1481607973(9)}($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)]);unset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)]);}else{$this->{$this->_1481607973(6)}->{$this->_1481607973(9)}([]);}$this->{$this->_1481607973(10)}->{$this->_1481607973(11)}($this->_1481607973(12).$this->{$this->_1481607973(13)},$this->{$this->_1481607973(0)}->{$this->_1481607973(4)},$this->{$this->_1481607973(0)}->{$this->_1481607973(15)}[$this->_1481607973(16)]);$this->generateCss($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(12).$this->{$this->_1481607973(13)}.$this->_1481607973(14)],$this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(12).$this->{$this->_1481607973(13)}.'_css_code'],$store_id);$this->{$this->_1481607973(24)}->{$this->_1481607973(17)}['success']=$this->{$this->_1314128468(4)}->{$this->_1481607973(15)}($this->_2074209311(2));$this->{$this->_2074209311(3)}->{$this->_2074209311(4)}($this->{$this->_2074209311(5)}->{$this->_2074209311(6)}($this->_1481607973(18).$this->{$this->_1481607973(13)},$this->_1481607973(23).'='.$this->{$this->_1481607973(24)}->{$this->_1481607973(17)}[$this->_1481607973(23)].'&'.$this->_1481607973(16).'='.$this->{$this->_1481607973(0)}->{$this->_1481607973(15)}[$this->_1481607973(16)],true));}
+		if(($this->{$this->_1481607973(0)}->{$this->_1481607973(1)}[$this->_1481607973(2)]==$this->_1481607973(3))&&$this->{$this->_1908729617(0)}()){if(isset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)])&&!empty($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)])){$this->{$this->_1481607973(6)}->{$this->_1481607973(7)}($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)]);unset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(5)]);}else{$this->{$this->_1481607973(6)}->{$this->_1481607973(7)}([]);}if(isset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)])&&!empty($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)])){$this->{$this->_1481607973(6)}->{$this->_1481607973(9)}($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)]);unset($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(8)]);}else{$this->{$this->_1481607973(6)}->{$this->_1481607973(9)}([]);}$this->{$this->_1481607973(10)}->{$this->_1481607973(11)}($this->_1481607973(12).$this->{$this->_1481607973(13)},$this->{$this->_1481607973(0)}->{$this->_1481607973(4)},$this->{$this->_1481607973(0)}->{$this->_1481607973(15)}[$this->_1481607973(16)]);$this->generateCss($this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(12).$this->{$this->_1481607973(13)}.$this->_1481607973(14)],$this->{$this->_1481607973(0)}->{$this->_1481607973(4)}[$this->_1481607973(12).$this->{$this->_1481607973(13)}.'_css_code'],$store_id);$this->cacheDelete();$this->{$this->_1481607973(24)}->{$this->_1481607973(17)}['success']=$this->{$this->_1314128468(4)}->{$this->_1481607973(15)}($this->_2074209311(2));$this->{$this->_2074209311(3)}->{$this->_2074209311(4)}($this->{$this->_2074209311(5)}->{$this->_2074209311(6)}($this->_1481607973(18).$this->{$this->_1481607973(13)},$this->_1481607973(23).'='.$this->{$this->_1481607973(24)}->{$this->_1481607973(17)}[$this->_1481607973(23)].'&'.$this->_1481607973(16).'='.$this->{$this->_1481607973(0)}->{$this->_1481607973(15)}[$this->_1481607973(16)],true));}
 
 		foreach ($oct_error_data as $error) {
 			if (isset($this->error[$error])) {
@@ -384,7 +384,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 		$css = '';
 
 		if (isset($data['main_color']) && !empty($data['main_color'])) {
-		    $css .= "#sc_fixed_contact_button, .sc-fixed-contact-pulsation, .sc-slideshow-plus .slick-dots li.slick-active button, .sc-slideshow-plus .slick-dots li:hover button, .form-check-input:checked, .ocf-theme-light-block .ocf-search-btn-static, .ocf-theme-light-block .ocf-search-btn-popover, .ocf-theme-light-block .ocf-search-btn-static.ocf-disabled, .ocf-theme-light-block .ocf-search-btn-popover.ocf-disabled, .header-buttons .sc-btn-icon-catalog, .slick-dots li.slick-active button, #sc_fixed_contact_button, .sc-fixed-contact-pulsation, .header-buttons .sc-btn:hover .sc-btn-icon, .sc-product-options .radio label.selected, .sc-footer-socials-item:hover, #sc-search-button:hover .sc-btn-icon {background:". $data['main_color'] .";}".PHP_EOL;
+		    $css .= "#sc_fixed_contact_button, .sc-fixed-contact-pulsation, .sc-slideshow-plus .slick-dots li.slick-active button, .sc-slideshow-plus .slick-dots li:hover button, .form-check-input:checked, .ocf-theme-light-block .ocf-search-btn-static, .ocf-theme-light-block .ocf-search-btn-popover, .ocf-theme-light-block .ocf-search-btn-static.ocf-disabled, .ocf-theme-light-block .ocf-search-btn-popover.ocf-disabled, .header-buttons .sc-btn-icon-catalog, .slick-dots li.slick-active button, #sc_fixed_contact_button, .sc-fixed-contact-pulsation, .header-buttons .sc-btn:hover .sc-btn-icon, .sc-product-options .radio label.selected, .sc-footer-socials-item:hover, #sc-search-button:hover .sc-btn-icon, .oct-checkout-block #button-confirm, .oct-checkout-block ul.dropdown-address li:hover {background:". $data['main_color'] .";}".PHP_EOL;
 			$css .= ".ocf-theme-light-block .ocf-search-btn-static, .ocf-theme-light-block .ocf-search-btn-popover, .ocf-theme-light-block .ocf-search-btn-static.ocf-disabled, .ocf-theme-light-block .ocf-search-btn-popover.ocf-disabled, .ocf-noUi-connect:before, .ocf-noUi-handle {background-color:" . $data['main_color'] . " !important;}" . PHP_EOL;
 			$css .= ".form-check-input:checked, .sc-btn-outline-primary:not([disabled]), .sc-product-options .radio label.radio-img.selected {border-color:". $data['main_color'] .";}".PHP_EOL;
 			$css .= ".sc-product-tab.active {border-bottom-color:" . $data['main_color'] . ";}" . PHP_EOL;
@@ -397,7 +397,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 		}
 
 		if (isset($data['main_link_color']) && !empty($data['main_link_color'])) {
-			$css .= ".sc-slideshow-plus-specials-block-title:hover, .sc-module-title:hover, .sc-contact-us .form-check-label a, .sc-subcategories-item:hover span:hover, .content-block-text a, .blue-link, .blue-link:hover, .sc-category-wall-item:hover span, .sc-megamenu-children-item a:hover, #oct-menu-ul .group-title a, .sc-last-reviews-item:hover .sc-last-reviews-item-title, .sc-module-item:hover .sc-module-title > a, .sc-module-item:hover .sc-module-title > a:visited, .sc-last-news-title:hover, .sc-livesearch-list-item-name a, .sc-fixed-contact-item:hover, .category-landing-links-item-link span, .sc-manufacturer-item a:hover .sc-manufacturer-item-title:hover, .table td a, .sc-alert-text a, .sc-day-discounts-item:hover a, .sc-header-phones-list-item:hover, .sc-header-location-phones a .sc-footer-phones-link, .sc-megamenu-child-narrow li:not(.sc-menu-list-landings) .sc-menu-list-landings-link:hover, .sc-footer-mail-link:hover, .collapse-value > button, .collapse-value > button:focus, .collapse-value > button:active, .collapse-value > button:active:focus, .sc-contact-location a, .modal-content a, .sc-product-tags a, .sc-category-wall-title:hover {color:". $data['main_link_color'] .";}".PHP_EOL;
+			$css .= ".sc-slideshow-plus-specials-block-title:hover, .sc-module-title:hover, .sc-contact-us .form-check-label a, .sc-subcategories-item:hover span:hover, .content-block-text a, .blue-link, .blue-link:hover, .sc-category-wall-item:hover span, .sc-megamenu-children-item a:hover, #oct-menu-ul .group-title a, .sc-last-reviews-item:hover .sc-last-reviews-item-title, .sc-module-item:hover .sc-module-title > a, .sc-module-item:hover .sc-module-title > a:visited, .sc-last-news-title:hover, .sc-livesearch-list-item-name a, .sc-fixed-contact-item:hover, .category-landing-links-item-link span, .sc-manufacturer-item a:hover .sc-manufacturer-item-title:hover, .table td a, .sc-alert-text a, .sc-day-discounts-item:hover a, .sc-header-phones-list-item:hover, .sc-header-location-phones a .sc-footer-phones-link, .sc-megamenu-child-narrow li:not(.sc-menu-list-landings) .sc-menu-list-landings-link:hover, .sc-footer-mail-link:hover, .collapse-value > button, .collapse-value > button:focus, .collapse-value > button:active, .collapse-value > button:active:focus, .sc-contact-location a, .modal-content a, .sc-product-tags a, .sc-category-wall-title:hover, .oct-checkout-block a {color:". $data['main_link_color'] .";}".PHP_EOL;
 		}
 
 		if (isset($data['button_color_main']) && !empty($data['button_color_main'])) {
@@ -530,7 +530,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 				fclose($addindexf);
 			}
 
-		    $this->session->data['success'] = $this->language->get('text_success_cache');
+		    $this->session->data['success'] = $this->language->get('text_success');
 
 		    // Maintance mode back to original settings
 			$this->model_setting_setting->editSettingValue('config', 'config_maintenance', $maintenance);
@@ -959,12 +959,12 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 			[
 				'code' => 'octemplates-showcase-google-ecommerce-set-data',
 				'trigger' => 'catalog/controller/checkout/success/before',
-				'action' => 'octemplates/events/ecommerce/setData'
+				'action' => 'octemplates/events/ecommerce/setOctEcommerceData'
 			],
 			[
 				'code' => 'octemplates-showcase-google-ecommerce-get-data',
 				'trigger' => 'catalog/view/common/success/before',
-				'action' => 'octemplates/events/ecommerce/getData'
+				'action' => 'octemplates/events/ecommerce/getOctEcommerceData'
 			],
 			[
 				'code' => 'octemplates-showcase-live-search',
@@ -1100,7 +1100,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 
 		// add module permissions
 		$modulesPermission = [
-			'octemplates/module/oct_fastorder',
+			'octemplates/module/oct_smart_checkout',
 			'octemplates/module/oct_stock_notifier'
 		];
 
@@ -1110,12 +1110,6 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 
 		// events
 		$modules = [
-			[
-				'setting' => 'oct_fastorder_data',
-				'key' => 'oct_fastorder_data.status',
-				'value' => 1,
-				'controller' => 'octemplates/module/oct_fastorder/addEvent'
-			],
 			[
 				'setting' => 'oct_404_page',
 				'key' => 'oct_404_page_status',
@@ -1360,6 +1354,7 @@ class ControllerExtensionThemeOCTShowCase extends Controller {
 				'header_account' => 1,
 				'header_cur' => 1,
 				'isbuttoninteractive' => 1,
+				'oct_popup_options' => 1,
 				'header_lang' => 1,
 				'footer_totop' => 1,
 				'footer_subscribe' => 1,

@@ -17,20 +17,20 @@
       <p class="help-block"><?php echo $help_copy_group_as_attribute; ?></p>
     </div>
   </div>
-  
+
   <div class="form-group">
     <label class="col-lg-3 control-label" new-feature><?php echo $entry_copy_attribute_data; ?></label>
-    <div class="col-sm-6 col-lg-4" data-group-as-attribute="0">          
+    <div class="col-sm-6 col-lg-4" data-group-as-attribute="0">
       <div class="input-group">
         <input type="text" name="autocomplete_attribute" value="" placeholder="<?php echo $placeholder_copy_attribute_autocomplete; ?>" class="form-control" />
         <label class="input-group-addon">
           <input type="checkbox" name="copy_attribute_id_exclude" value="1" autocomplete="off" <?php echo ($copy_attribute_id_exclude ? 'checked' : ''); ?>> <?php echo $entry_copy_exclude; ?>
-        </label>       
+        </label>
         <div class="input-group-btn">
           <button type="button" class="btn btn-default" onclick="getAutoAttributes(this)" data-loading-text="<?php echo $text_loading; ?>"><?php echo $button_auto; ?></button>
         </div>
         <div class="input-group-addon"><i class="fa fa-bars"></i></div>
-      </div>            
+      </div>
       <div class="alert alert-success mb-0" id="copy-attribute-id" style="height: 150px; overflow: auto;">
         <?php foreach ($copy_attribute_id as $attribute_id => $name) { ?>
         <div id="copy-attribute-<?php echo $attribute_id; ?>">
@@ -41,14 +41,14 @@
       </div>
       <button type="button" class="btn btn-link" onclick="$(this).prev().html(''); buildCopyCode();"><?php echo $button_clear; ?></button>
     </div>
-    <div class="col-sm-6 col-lg-4" data-group-as-attribute="1">          
+    <div class="col-sm-6 col-lg-4" data-group-as-attribute="1">
       <div class="input-group">
         <input type="text" name="autocomplete_attribute_group" value="" placeholder="<?php echo $placeholder_copy_attribute_group_autocomplete; ?>" class="form-control" />
         <label class="input-group-addon">
           <input type="checkbox" name="copy_attribute_group_id_exclude" value="1" autocomplete="off" <?php echo ($copy_attribute_group_id_exclude ? 'checked' : ''); ?>> <?php echo $entry_copy_exclude; ?>
-        </label>          
+        </label>
         <div class="input-group-addon"><i class="fa fa-bars"></i></div>
-      </div>            
+      </div>
       <div class="alert alert-success mb-0" id="copy-attribute-id" style="height: 150px; overflow: auto;">
         <?php foreach ($copy_attribute_group_id as $attribute_group_id => $name) { ?>
         <div id="copy-attribute-<?php echo $attribute_group_id; ?>">
@@ -59,14 +59,14 @@
       </div>
       <button type="button" class="btn btn-link" onclick="$(this).prev().html(''); buildCopyCode();"><?php echo $button_clear; ?></button>
     </div>
-    <div class="col-sm-6 col-lg-4">          
+    <div class="col-sm-6 col-lg-4">
       <div class="input-group">
         <input type="text" name="autocomplete_attribute_category" value="" placeholder="<?php echo $placeholder_copy_category_autocomplete; ?>" class="form-control" />
         <label class="input-group-addon">
           <input type="checkbox" name="copy_attribute_category_id_exclude" value="1" autocomplete="off" <?php echo ($copy_attribute_category_id_exclude ? 'checked' : ''); ?>> <?php echo $entry_copy_exclude; ?>
-        </label>           
+        </label>
         <div class="input-group-addon"><i class="fa fa-bars"></i></div>
-      </div>            
+      </div>
       <div class="alert alert-success mb-0" id="copy-attribute-category-id" style="height: 150px; overflow: auto;">
         <?php foreach ($copy_attribute_category_id as $attribute_category_id => $name) { ?>
         <div id="copy-attribute-category-<?php echo $attribute_category_id; ?>">
@@ -76,7 +76,7 @@
         <?php } ?>
       </div>
       <button type="button" class="btn btn-link" onclick="$(this).prev().html(''); buildCopyCode();"><?php echo $button_clear; ?></button>
-    </div>   
+    </div>
     <div class="col-sm-offset-3 col-sm-9">
       <p class="help-block"><?php echo $help_copy_attribute_data; ?></p>
     </div>
@@ -147,15 +147,15 @@
 
 <div class="form-group">
   <label class="col-sm-3 control-label" new-feature><?php echo $entry_copy_value_separator; ?></label>
-  <div class="col-sm-5">     
+  <div class="col-sm-5">
     <div class="input-group">
       <div class="input-group-addon">1</div>
       <input name="copy_value_separator[]" type="text" class="form-control" placeholder="<?php echo $placeholder_copy_value_separator; ?>" value="<?php echo (isset($copy_value_separator[0]) ? $copy_value_separator[0] : ''); ?>" />
       <div class="input-group-addon">2</div>
       <input name="copy_value_separator[]" type="text" class="form-control" placeholder="<?php echo $placeholder_copy_value_separator; ?>" value="<?php echo (isset($copy_value_separator[1]) ? $copy_value_separator[1] : ''); ?>" />
       <div class="input-group-addon">3</div>
-      <input name="copy_value_separator[]" type="text" class="form-control" placeholder="<?php echo $placeholder_copy_value_separator; ?>" value="<?php echo (isset($copy_value_separator[2]) ? $copy_value_separator[2] : ''); ?>" />      
-    </div>    
+      <input name="copy_value_separator[]" type="text" class="form-control" placeholder="<?php echo $placeholder_copy_value_separator; ?>" value="<?php echo (isset($copy_value_separator[2]) ? $copy_value_separator[2] : ''); ?>" />
+    </div>
   </div>
   <div class="col-sm-offset-3 col-sm-9">
     <p class="help-block"><?php echo $help_copy_value_separator; ?></p>
@@ -166,7 +166,7 @@
   <label class="col-sm-3 control-label"><?php echo $entry_copy_clear_filter; ?></label>
   <div class="col-sm-9">
     <?php $tpl_bool_button('copy_truncate', $copy_truncate, 'y/n'); ?>
-    
+
     <p class="help-block"><?php echo $help_copy_clear_filter; ?></p>
   </div>
 </div>
@@ -236,7 +236,7 @@
         <input type="text" name="cron_period_manual" value="" class="form-control" placeholder="<?php echo $text_cron_period_manual; ?>" />
       </div><!-- /.input-group -->
     </div><br />
-    
+
     <p><?php echo $text_cron_bin; ?></p>
     <kbd contenteditable="true" onclick="document.execCommand('selectAll', false, null)" style="font-size: 14px;"><span class="cron-period"></span> <?php echo $cron_command_bin; ?> -f <?php echo $cron_command_script; ?></kbd>
     <br /><br />
@@ -257,9 +257,9 @@
       <label class="input-group-addon">
         <input type="checkbox" name="copy_save_setting" value="1" autocomplete="off"> <?php echo $entry_copy_save_setting; ?>
       </label>
-    </div>    
+    </div>
   </div>
-  
+
   <div class="col-sm-offset-3 col-sm-9">
     <pre id="copy-log" style="max-height: 300px; overflow: auto; margin-top: 20px;"></pre>
   </div>
@@ -267,7 +267,7 @@
 
 <script type="text/javascript">
 
-var 
+var
 
 ocfDOMReady = function(fn) {
   if (document.readyState != 'loading') {
@@ -301,49 +301,49 @@ buildCopyCode = function() {
     }
 
     code += ',';
-    
+
     if ($control.closest('.form-group').find('.control-label').length) {
       code += ' <span class="text-muted">// ' + $control.closest('.form-group').find('.control-label').text() + '</span>';
     }
 
     code += "<br>";
   });
-  
+
   // Arrays
   values = [];
-  
+
   $('#tab-copy').find('[name^="copy_value_separator["]').each(function() {
-    $(this).val() && values.push('<span class="text-success">\'' + $(this).val() + '\'</span>');    
+    $(this).val() && values.push('<span class="text-success">\'' + $(this).val() + '\'</span>');
   });
 
-  code += '  <span class="text-success">\'copy_value_separator\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($entry_copy_value_separator); ?></span><br>';   
-  
+  code += '  <span class="text-success">\'copy_value_separator\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($entry_copy_value_separator); ?></span><br>';
+
   // Attributes
   values = [];
-  
+
   $('#tab-copy').find('[name^="copy_attribute_id["]').each(function() {
-    values.push('<span class="text-success">\'' + $(this).attr('name').match(/\[(\d+)\]/)[1] + '\'</span>');    
+    values.push('<span class="text-success">\'' + $(this).attr('name').match(/\[(\d+)\]/)[1] + '\'</span>');
   });
 
-  code += '  <span class="text-success">\'copy_attribute_id\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($placeholder_copy_attribute_autocomplete); ?></span><br>';     
-  
+  code += '  <span class="text-success">\'copy_attribute_id\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($placeholder_copy_attribute_autocomplete); ?></span><br>';
+
   // Attribute groups
   values = [];
-  
+
   $('#tab-copy').find('[name^="copy_attribute_group_id["]').each(function() {
-    values.push('<span class="text-success">\'' + $(this).attr('name').match(/\[(\d+)\]/)[1] + '\'</span>');    
+    values.push('<span class="text-success">\'' + $(this).attr('name').match(/\[(\d+)\]/)[1] + '\'</span>');
   });
 
-  code += '  <span class="text-success">\'copy_attribute_group_id\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($placeholder_copy_attribute_group_autocomplete); ?></span><br>';   
+  code += '  <span class="text-success">\'copy_attribute_group_id\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($placeholder_copy_attribute_group_autocomplete); ?></span><br>';
 
   // Categories
   values = [];
-  
+
   $('#tab-copy').find('[name^="copy_attribute_category_id["]').each(function() {
-    values.push('<span class="text-success">\'' + $(this).attr('name').match(/\[(\d+)\]/)[1] + '\'</span>');    
+    values.push('<span class="text-success">\'' + $(this).attr('name').match(/\[(\d+)\]/)[1] + '\'</span>');
   });
 
-  code += '  <span class="text-success">\'copy_attribute_category_id\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($placeholder_copy_category_autocomplete); ?></span><br>';     
+  code += '  <span class="text-success">\'copy_attribute_category_id\'</span> => [' + values.join(', ') + '], <span class="text-muted">// <?php echo addslashes($placeholder_copy_category_autocomplete); ?></span><br>';
 
   code += ']);<br>';
   code += '<span class="text-muted">// OCFilter copy end</span>';
@@ -353,16 +353,16 @@ buildCopyCode = function() {
 
 getAutoAttributes = function(btn) {
   $(btn).button('loading');
-  
+
   $.get(ocfilter.link('extension/module/ocfilter/getCopyAttribute', 'exclude=' + ($('input[name="copy_attribute_id_exclude"]').prop('checked') + 0)), {}, function(response) {
     $(btn).button('reset');
-    
+
     for (var i = 0, len = response.length; i < len; i++) {
       $('#copy-attribute-' + response[i].attribute_id).remove();
 
-      $('#copy-attribute-id').append('<div id="copy-attribute-' + response[i].attribute_id + '"><i class="fa fa-fw fa-minus-circle" onclick="$(this).parent().remove();"></i> ' + response[i].name + '<input type="hidden" name="copy_attribute_id[' + response[i].attribute_id + ']" value="' + response[i].name + '" /></div>');      
+      $('#copy-attribute-id').append('<div id="copy-attribute-' + response[i].attribute_id + '"><i class="fa fa-fw fa-minus-circle" onclick="$(this).parent().remove();"></i> ' + response[i].name + '<input type="hidden" name="copy_attribute_id[' + response[i].attribute_id + ']" value="' + response[i].name + '" /></div>');
     }
-    
+
     buildCopyCode();
   }, 'json');
 };
@@ -372,10 +372,10 @@ $(function() {
   $('input[name="copy_attribute"]').on('change', function() {
     $('#collapse-copy-attribute').collapse($(this).prop('checked') && $(this).val() == 1 ? 'show' : 'hide');
   }).filter(':checked').trigger('change');
-  
+
   $('input[name="copy_option"]').on('change', function() {
     $('#collapse-copy-option').collapse($(this).prop('checked') && $(this).val() == 1 ? 'show' : 'hide');
-  }).filter(':checked').trigger('change');  
+  }).filter(':checked').trigger('change');
 
   $('#tab-copy').find('input, select').on('change', buildCopyCode);
 
@@ -397,14 +397,16 @@ $(function() {
   var timer, copyDone = false, copySuccess = false, copyHash;
 
   function checkLog() {
+    $('#copy-log').get(0).scrollTop = 9999;
+
     if (copyDone) {
       return;
     }
-  
+
     $.get(ocfilter.link('extension/module/ocfilter/getCopyLog'), {}, function(response) {
       if (response.indexOf(copyHash) !== -1) {
         copyDone = true;
-        
+
         if (!copySuccess) {
           $('#button-copy-filter').button('complete');
 
@@ -413,25 +415,25 @@ $(function() {
           }, 7 * 1000);
         }
       }
-    
+
       $('#copy-log').html(response.replace(/\[(.+?)\]/g, '<b class="text-primary">$1</b>')).get(0).scrollTop = 9999;
-    
+
       setTimeout(checkLog, 2000);
     }, 'text');
   }
-  
+
   $('#button-copy-filter').on('click', function(e) {
     copyHash = (new Date()).getTime();
     copyDone = false;
     copySuccess = false;
-    
+
     clearTimeout(timer);
 
     if ($('#tab-copy input[name="copy_truncate"][value="1"]:checked').length > 0 && !confirm('<?php echo $text_confirm_truncate_copy; ?>')) {
       return false;
     }
-    
-    checkLog();    
+
+    checkLog();
 
     $('#tab-copy > .alert').remove();
 
@@ -450,26 +452,26 @@ $(function() {
         timer = setTimeout(function() {
           $button.button('reset');
         }, 7 * 1000);
-        
+
         copySuccess = true;
       }
     }, 'json');
   });
-    
+
   $.get(ocfilter.link('extension/module/ocfilter/getCopyDataTotals'), {}, function(json) {
     for (var i in json) {
       if (json.hasOwnProperty(i)) {
         $('#' + i.replace(/_/g, '-')).html(json[i]);
       }
     }
-  }, 'json');  
-  
-	$('input[name="autocomplete_attribute"]').autocomplete({  
+  }, 'json');
+
+	$('input[name="autocomplete_attribute"]').autocomplete({
 		'source': function(request, response) {
       var $this = $(this);
-      
-      $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-refresh fa-spin');  
-    
+
+      $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-refresh fa-spin');
+
 			$.ajax({
 				url: ocfilter.link('extension/module/ocfilter/autocompleteAttribute', 'filter_name=' +  request),
 				dataType: 'json',
@@ -483,7 +485,7 @@ $(function() {
 					}));
 				}
 			});
-      
+
       $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-bars');
 		},
 		'select': function(item) {
@@ -492,17 +494,17 @@ $(function() {
       $('#copy-attribute-' + item.value).remove();
 
       $('#copy-attribute-id').append('<div id="copy-attribute-' + item.value + '"><i class="fa fa-fw fa-minus-circle" onclick="$(this).parent().remove();"></i> ' + item.label + '<input type="hidden" name="copy_attribute_id[' + item.value + ']" value="' + item.label + '" /></div>');
-      
+
       buildCopyCode();
 		}
-	}); 
+	});
 
-	$('input[name="autocomplete_attribute_group"]').autocomplete({  
+	$('input[name="autocomplete_attribute_group"]').autocomplete({
 		'source': function(request, response) {
       var $this = $(this);
-      
-      $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-refresh fa-spin');  
-    
+
+      $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-refresh fa-spin');
+
 			$.ajax({
 				url: ocfilter.link('extension/module/ocfilter/autocompleteAttributeGroup', 'filter_name=' +  request),
 				dataType: 'json',
@@ -515,26 +517,26 @@ $(function() {
 					}));
 				}
 			});
-      
+
       $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-bars');
 		},
 		'select': function(item) {
 			$(this).val('');
-      
+
       $('#copy-attribute-group-' + item.value).remove();
 
       $('#copy-attribute-group-id').append('<div id="copy-attribute-group-' + item.value + '"><i class="fa fa-fw fa-minus-circle" onclick="$(this).parent().remove();"></i> ' + item.label + '<input type="hidden" name="copy_attribute_group_id[' + item.value + ']" value="' + item.label + '" /></div>');
-      
+
       buildCopyCode();
 		}
-	}); 
+	});
 
-	$('input[name="autocomplete_attribute_category"]').autocomplete({  
+	$('input[name="autocomplete_attribute_category"]').autocomplete({
 		'source': function(request, response) {
       var $this = $(this);
-      
-      $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-refresh fa-spin');  
-    
+
+      $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-refresh fa-spin');
+
 			$.ajax({
 				url: ocfilter.link('extension/module/ocfilter/autocompleteCategory', 'filter_name=' +  request),
 				dataType: 'json',
@@ -547,31 +549,31 @@ $(function() {
 					}));
 				}
 			});
-      
+
       $this.parent().find('.input-group-addon').find('i').attr('class', 'fa fa-bars');
 		},
 		'select': function(item) {
 			$(this).val('');
-      
+
       $('#copy-attribute-category-' + item.value).remove();
 
       $('#copy-attribute-category-id').append('<div id="copy-attribute-category-' + item.value + '"><i class="fa fa-fw fa-minus-circle" onclick="$(this).parent().remove();"></i> ' + item.label + '<input type="hidden" name="copy_attribute_category_id[' + item.value + ']" value="' + item.label + '" /></div>');
-      
+
       buildCopyCode();
 		}
-	});   
-  
+	});
+
   $('input[name="copy_group_as_attribute"]').on('change', function(e) {
     $('[data-group-as-attribute]').hide().filter('[data-group-as-attribute="' + $('input[name="copy_group_as_attribute"]:checked').val() + '"]').show();
   }).filter(':checked').trigger('change');
-  
+
   $('input[name$="_exclude"]').on('change', function(e) {
     $(this).closest('.input-group').next().toggleClass('alert-danger', this.checked);
-  }).filter(':checked').trigger('change');  
-  
+  }).filter(':checked').trigger('change');
+
   $('#input-copy-cron-wget').on('change', function(e) {
     $('.cron-command-wget').toggleClass('ocf-opacity-50', !this.checked);
-  }).trigger('change');   
+  }).trigger('change');
 });
 }); // DOM Ready
 </script>

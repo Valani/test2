@@ -14,14 +14,14 @@
     <?php echo $entry_filter; ?>
     <div class="help-block text-left"><?php echo $help_ocfilter_filter; ?></div>
   </label>
-  <div class="col-md-9">              
+  <div class="col-md-9">
     <?php if ($error_filter) { ?>
     <div class="text-danger"><?php echo $error_filter; ?></div>
-    <?php } ?>     
-    <div class="well well-sm" id="filter-relation-content"></div>                 
+    <?php } ?>
+    <div class="well well-sm" id="filter-relation-content"></div>
   </div>
 </div>
-<script> 
+<script>
 ocfDOMReady(function() {
 $(function() {
   $('input[name="category_name"]').autocomplete({
@@ -32,7 +32,7 @@ $(function() {
         success: function(json) {
           json.unshift({
             category_id: 0,
-            name: '<?php echo $text_none; ?>'
+            name: '<?php echo $text_any; ?>'
           });
 
           response($.map(json, function(item) {
@@ -46,15 +46,15 @@ $(function() {
     },
     'select': function(item) {
       $('input[name="category_name"]').val('').attr('placeholder', item['label']);
-      
+
       $('input[name="category_id"]').val(item['value']).trigger('change');
-      
+
       ocfilter.getRelationForm($.extend({}, relationFormOptions, { category_id: item['value'] }));
     }
   });
-    
+
   // Get filters relation form
-  ocfilter.getRelationForm(relationFormOptions);    
+  ocfilter.getRelationForm(relationFormOptions);
 });
 });
 </script>

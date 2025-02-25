@@ -133,7 +133,7 @@ class ControllerOCTemplatesEventsAdminHeader extends Controller {
 
     public function headerAddOctData(&$route, &$data, &$output) {
 
-        $fontawesome_free = '<link href="view/stylesheet/fontawesome-free-5.15.4-web/css/all.css" type="text/css" rel="stylesheet" />';
+        $fontawesome_free = '<link href="view/stylesheet/fontawesome-free-6.5.2-web/css/all.css" type="text/css" rel="stylesheet" />';
         $output = str_replace("<head>", "<head>\r\n". $fontawesome_free, $output);
 
         $search = '<ul class="nav navbar-nav navbar-right">';

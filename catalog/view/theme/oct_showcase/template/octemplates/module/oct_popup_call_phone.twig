@@ -28,11 +28,10 @@
 						</div>
 					{% endif %}
 					{% if text_terms %}
-						<div class="d-flex pb-3">
-							<input id="agreeCallbackCheck" type="checkbox" class="form-check-input hidden" name="agree" checked>
+						<div class="form-check d-flex pb-3">
+							<input id="agreeCallbackCheck" type="checkbox" class="form-check-input" name="agree">
 							<label class="form-check-label" for="agreeCallbackCheck">
-								<p>{{ text_agree2 }}:</p>
-								<p><a href="{{ privacy_link }}" class="agree">{{ text_privacy2 }}</a></p>
+								{{ text_terms }}
 							</label>
 						</div>
 					{% endif %}
@@ -93,7 +92,10 @@
 	</script>
 	{% if mask is defined and mask is not empty %}
 	<script>
-	scInputMask('#inputCallbackPhone','{{ mask }}');
+	$('#inputCallbackPhone').inputmask({
+		mask: '{{ mask }}',
+		clearMaskOnLostFocus: false
+	});
 	</script>
 	{% endif %}
 </div>
