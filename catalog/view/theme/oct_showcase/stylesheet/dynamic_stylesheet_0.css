@@ -1,0 +1,31 @@
+#sc_fixed_contact_button, .sc-fixed-contact-pulsation, .sc-slideshow-plus .slick-dots li.slick-active button, .sc-slideshow-plus .slick-dots li:hover button, .form-check-input:checked, .ocf-theme-light-block .ocf-search-btn-static, .ocf-theme-light-block .ocf-search-btn-popover, .ocf-theme-light-block .ocf-search-btn-static.ocf-disabled, .ocf-theme-light-block .ocf-search-btn-popover.ocf-disabled, .header-buttons .sc-btn-icon-catalog, .slick-dots li.slick-active button, #sc_fixed_contact_button, .sc-fixed-contact-pulsation, .header-buttons .sc-btn:hover .sc-btn-icon, .sc-product-options .radio label.selected, .sc-footer-socials-item:hover, #sc-search-button:hover .sc-btn-icon, .oct-checkout-block #button-confirm, .oct-checkout-block ul.dropdown-address li:hover {background:rgb(79, 67, 227);}
+.ocf-theme-light-block .ocf-search-btn-static, .ocf-theme-light-block .ocf-search-btn-popover, .ocf-theme-light-block .ocf-search-btn-static.ocf-disabled, .ocf-theme-light-block .ocf-search-btn-popover.ocf-disabled, .ocf-noUi-connect:before, .ocf-noUi-handle {background-color:rgb(79, 67, 227) !important;}
+.form-check-input:checked, .sc-btn-outline-primary:not([disabled]), .sc-product-options .radio label.radio-img.selected {border-color:rgb(79, 67, 227);}
+.sc-product-tab.active {border-bottom-color:rgb(79, 67, 227);}
+.sc-btn-outline-primary:not([disabled]), .header-buttons .sc-btn.header-buttons-catalog, .header-buttons .sc-btn:hover {color:rgb(79, 67, 227);}
+.header-buttons-catalog path {stroke:rgb(79, 67, 227);}
+body {background-color:rgb(248, 249, 250);}
+.sc-slideshow-plus-specials-block-title:hover, .sc-module-title:hover, .sc-contact-us .form-check-label a, .sc-subcategories-item:hover span:hover, .content-block-text a, .blue-link, .blue-link:hover, .sc-category-wall-item:hover span, .sc-megamenu-children-item a:hover, #oct-menu-ul .group-title a, .sc-last-reviews-item:hover .sc-last-reviews-item-title, .sc-module-item:hover .sc-module-title > a, .sc-module-item:hover .sc-module-title > a:visited, .sc-last-news-title:hover, .sc-livesearch-list-item-name a, .sc-fixed-contact-item:hover, .category-landing-links-item-link span, .sc-manufacturer-item a:hover .sc-manufacturer-item-title:hover, .table td a, .sc-alert-text a, .sc-day-discounts-item:hover a, .sc-header-phones-list-item:hover, .sc-header-location-phones a .sc-footer-phones-link, .sc-megamenu-child-narrow li:not(.sc-menu-list-landings) .sc-menu-list-landings-link:hover, .sc-footer-mail-link:hover, .collapse-value > button, .collapse-value > button:focus, .collapse-value > button:active, .collapse-value > button:active:focus, .sc-contact-location a, .modal-content a, .sc-product-tags a, .sc-category-wall-title:hover, .oct-checkout-block a {color:rgb(0, 99, 247);}
+.sc-btn-primary:not([disabled]), button[data-target="#ocfilter-hidden-options"], #ocfilter .btn-primary, #ocfilter .btn-primary:active, #ocfilter .btn-primary:focus, .simplecheckout-cart-buttons .button:hover, .simplecheckout-button-right .button:hover, #simplecheckout_button_login:hover, .pagination li.active span, .pagination li:hover a, #sc_livesearch_close, .simplecheckout-cart-buttons .button, .sc-header-location.active .sc-btn, .sc-btn-secondary:not([disabled]).clicked, .sc-btn-secondary:not([disabled]):hover, .sc-category-sort button.active, .sc-btn-outline-secondary:not(#oct-blog-search-button, #sc-search-button, [disabled]):hover, .header-search .sc-btn-with-icon:hover .sc-btn-icon, .sc-blog-search .sc-btn-with-icon:hover .sc-btn-icon, .sc-btn.sc-btn-secondary:not([disabled]):hover, .sc-switcher, .sidebar-main-menu-item-catalog .sidebar-main-menu-item-icon, .sc-btn-outline-primary:not([disabled]):hover, .sc-location.active .sc-btn-secondary {background-color:rgb(79, 67, 227);}
+.sc-btn-outline-primary:not([disabled]) {border-color:rgb(79, 67, 227);}
+.sc-btn-outline-primary:not([disabled]) {color:rgb(79, 67, 227);}
+.sc-btn.primary, .sc-btn-primary:not([disabled]), .sc-btn.primary .sc-btn-text, .sc-btn-primary:not([disabled]).sc-btn-text, .sc-btn.sc-btn-secondary:not([disabled]):hover .sc-btn-text, .sc-btn.sc-btn-secondary:not([disabled]).clicked .sc-btn-text, .sc-btn-outline-primary:not([disabled]):hover {color:rgb(255, 255, 255);}
+.sc-btn-primary:not([disabled]) .sc-btn-icon {background:rgb(255, 255, 255);}
+.sc-btn.sc-btn-secondary:not([disabled]):hover .sc-btn-icon {background:rgb(255, 255, 255);}
+.sc-btn-secondary:not([disabled]) {background-color:rgb(242, 244, 248);}
+.sc-btn-secondary, .sc-btn-secondary .sc-btn-text {color:rgb(28, 28, 40);}
+.sc-btn-secondary .sc-btn-icon {background:rgb(28, 28, 40);}
+#top {background:rgb(40, 33, 130);}
+.top-left li a, #top .sc-dropdown-toggle, .top-right .popup-call-trigger {color:rgb(255, 255, 255);}
+.top-left li a:hover, #top .sc-dropdown-toggle:hover, .top-right .popup-call-trigger:hover {color:rgb(255, 255, 255);}
+.sc-footer {background-color:rgb(42, 37, 104);}
+.sc-footer, .sc-footer-subscribe .form-check-label, .sc-footer-credits {color:rgb(199, 201, 217);}
+.sc-footer-phones, .sc-footer-list a, .sc-footer-email {color:rgb(199, 201, 217);}
+.sc-footer-phones a:hover, .sc-footer-list a:hover, .sc-footer-email:hover {color:rgb(255, 255, 255);}
+.sc-column-categories-item {background:rgb(252, 252, 252);}
+.sc-column-categories-item {color:rgb(39, 35, 35);}
+.sc-column-categories-item.active > span, .sc-column-categories-item .sc-categories-3 .active, .sc-column-categories-item a:hover, .sc-column-categories .sc-categories-3 li.active a {color:rgb(10, 120, 191);}
+.modal-header {background:rgb(242, 244, 248);}
+.modal-title {color:rgb(28, 28, 40);}
+.modal-header .btn-close {color:rgb(119, 119, 119);}
+@media (max-width: 767px) {.header {background:rgb(255, 255, 255);}}
