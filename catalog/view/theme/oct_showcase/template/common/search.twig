@@ -11,6 +11,7 @@
 	</form>
 </div>
 
+{% if oct_live_search_status %}
 <script>
 function clearLiveSearch() {
 	$('#sc_livesearch_close').removeClass('visible');
@@ -21,71 +22,70 @@ function clearLiveSearch() {
 	$('#input_search').val('').removeClass('active');
 }
 
-{% if oct_live_search_status %}
-	$(document).ready(function() {
-		let timer, delay = {{ delay_setting }};
+$(document).ready(function() {
+	let timer, delay = {{ delay_setting }};
 
-		$('#input_search').keyup(function(event) {
-			switch(event.keyCode) {
-				case 37:
-				case 39:
-				case 38:
-				case 40:
-					return;
-				case 27:
-					clearLiveSearch();
-					return;
+    $('#input_search').keyup(function(event) {
+	    switch(event.keyCode) {
+			case 37:
+			case 39:
+			case 38:
+			case 40:
+				return;
+			case 27:
+				clearLiveSearch();
+				return;
+		  }
+
+	    clearTimeout(timer);
+
+	    timer = setTimeout(function() {
+	        let value = $('#search input[name=\'search\']').val();
+			const overlay = document.getElementById('overlay');
+
+			if (value.length >= {{ count_symbol }}) {
+				let key = encodeURIComponent(value);
+				octsearch.search(key, 'desktop');
+			} else if (value.length === 0) {
+				clearLiveSearch();
 			}
 
-			clearTimeout(timer);
+			overlay.addEventListener('click', (e) => {
+				const target = e.target;
 
-			timer = setTimeout(function() {
-				let value = $('#search input[name=\'search\']').val();
-				const overlay = document.getElementById('overlay');
+				target.classList.remove('active');
 
-				if (value.length >= {{ count_symbol }}) {
-					let key = encodeURIComponent(value);
-					octsearch.search(key, 'desktop');
-				} else if (value.length === 0) {
-					clearLiveSearch();
-				}
-
-				overlay.addEventListener('click', (e) => {
-					const target = e.target;
-
-					target.classList.remove('active');
-
-					clearLiveSearch();
-				});
-
-			}, delay );
-		});
-	});
-
-	var octsearch = {
-		'search': function(key, type) {
-			$.ajax({
-				url: 'index.php?route=octemplates/module/oct_live_search',
-				type: 'post',
-				data: 'key=' + key,
-				dataType: 'html',
-				cache: false,
-				success: function(data) {
-					$('#sc_livesearch').html(data).addClass('expanded');
-
-					if(data = data.match(/livesearch/g)) {
-						$('#sc_livesearch_close').addClass('visible');
-						$('#input_search, #overlay').addClass('active');
-						$('#overlay').addClass('transparent');
-
-					} else {
-						$('#sc_livesearch_close').removeClass('visible');
-						$('#input_search, #overlay').removeClass('active');
-						$('#overlay').removeClass('transparent');
-					}
-				}
+				clearLiveSearch();
 			});
-		}
+
+	    }, delay );
+	});
+});
+
+var octsearch = {
+	'search': function(key, type) {
+		$.ajax({
+			url: 'index.php?route=octemplates/module/oct_live_search',
+			type: 'post',
+			data: 'key=' + key,
+			dataType: 'html',
+			cache: false,
+			success: function(data) {
+				$('#sc_livesearch').html(data).addClass('expanded');
+
+				if(data = data.match(/livesearch/g)) {
+					$('#sc_livesearch_close').addClass('visible');
+	                $('#input_search, #overlay').addClass('active');
+                    $('#overlay').addClass('transparent');
+
+				} else {
+					$('#sc_livesearch_close').removeClass('visible');
+	                $('#input_search, #overlay').removeClass('active');
+                    $('#overlay').removeClass('transparent');
+				}
+			}
+		});
 	}
-{% endif %}
+}
 </script>
+{% endif %}

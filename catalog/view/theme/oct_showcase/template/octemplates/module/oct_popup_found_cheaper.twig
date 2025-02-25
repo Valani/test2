@@ -58,10 +58,11 @@
 					</div>
 					{% endif %}
 					{% if text_terms %}
-					<div class="form-check d-flex pb-3">
-						<input id="agreeCheaperCheck" type="checkbox" class="form-check-input" name="agree">
+					<div class="d-flex pb-3">
+						<input id="agreeCheaperCheck" type="checkbox" class="form-check-input hidden" name="agree" checked>
 						<label class="form-check-label" for="agreeCheaperCheck">
-							{{ text_terms }}
+							<p>{{ text_agree2 }}:</p>
+							<p><a href="{{ privacy_link }}" class="agree">{{ text_privacy2 }}</a></p>
 						</label>
 					</div>
 					{% endif %}
@@ -112,6 +113,7 @@ $('#found-cheaper-form').on('submit', function (event) {
 				scNotify('danger', errorOption);
 			} else {
 				if (json['output']) {
+					dataLayer.push({'event':'found_cheaper'});
 					$("#sc-popup-success-cheaper-text").html(json['output']);
 					$("#cheaper-main-block").html($(".sc-popup-success"));
 					$(".sc-popup-success").removeClass("d-none");
@@ -123,10 +125,7 @@ $('#found-cheaper-form').on('submit', function (event) {
 </script>
 {% if oct_popup_found_cheaper_data.mask is defined and oct_popup_found_cheaper_data.mask is not empty %}
 <script>
-$('#inputCheaperPhone').inputmask({
-	mask: '{{ oct_popup_found_cheaper_data.mask }}',
-	clearMaskOnLostFocus: false
-});
+scInputMask('#inputCheaperPhone','{{ oct_popup_found_cheaper_data.mask }}');
 </script>
 {% endif %}
 </div>

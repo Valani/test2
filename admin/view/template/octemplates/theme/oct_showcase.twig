@@ -66,7 +66,7 @@
 									<li><a href="#tab-header" data-toggle="tab" aria-expanded="true"><i class="fa fa-arrow-up fw"></i> {{ tab_header }}</a></li>
 									<li><a href="#tab-footer" data-toggle="tab" aria-expanded="true"><i class="fa fa-arrow-down fw"></i> {{ tab_footer }}</a></li>
 									<li><a href="#tab-contacts" data-toggle="tab" aria-expanded="true"><i class="fa fa-users fw"></i> {{ tab_contacts }}</a></li>
-									<li><a href="#tab-menu" data-toggle="tab" aria-expanded="true"><i class="fa fa-bars fw"></i> {{ tab_menu }}</a></li>
+									<li><a href="#tab-menu" data-toggle="tab" aria-expanded="true"><i class="fab fa-medium-m fw"></i> {{ tab_menu }}</a></li>
 									<li><a href="#tab-category" data-toggle="tab" aria-expanded="true"><i class="fa fa-folder-open fw"></i> {{ tab_category }}</a></li>
 									<li><a href="#tab-product" data-toggle="tab" aria-expanded="true"><i class="fa fa-tv fw"></i> {{ tab_product }}</a></li>
 									<li><a href="#tab-orders" data-toggle="tab" aria-expanded="true"><i class="far fa-check-circle fw"></i> {{ tab_order }}</a></li>
@@ -202,21 +202,6 @@
 																<div class="toggle-group">
 																	<input type="checkbox" name="theme_oct_showcase_data[isbuttoninteractive]" {% if theme_oct_showcase_data.isbuttoninteractive %}checked="checked"{% endif %} id="input-isbuttoninteractive" tabindex="1">
 																	<label for="input-isbuttoninteractive"></label>
-																	<div class="onoffswitch pull-left" aria-hidden="true">
-																		<div class="onoffswitch-label">
-																			<div class="onoffswitch-inner"></div>
-																			<div class="onoffswitch-switch"></div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="col-sm-6">
-															<label class="col-sm-4 control-label" for="input-oct-popup-options">{{ entry_oct_popup_options }}</label>
-															<div class="col-sm-8">
-																<div class="toggle-group">
-																	<input type="checkbox" name="theme_oct_showcase_data[oct_popup_options]" {% if theme_oct_showcase_data.oct_popup_options %} checked="checked" {% endif %} id="input-oct-popup-options" tabindex="1">
-																	<label for="input-oct-popup-options"></label>
 																	<div class="onoffswitch pull-left" aria-hidden="true">
 																		<div class="onoffswitch-label">
 																			<div class="onoffswitch-inner"></div>
@@ -4854,5 +4839,14 @@ function fontIcons(icone_id, input_id) {
 		}
 	});
 }
+</script>
+<script>
+	if ('{{ success }}' == '{{ text_success }}'){
+		setTimeout(function() {
+			if(confirm("{{ auto_clear_cache }}")){
+				$('.fa.fa-trash-o').click();
+			}
+		}, 500);
+	}
 </script>
 {{ footer }}

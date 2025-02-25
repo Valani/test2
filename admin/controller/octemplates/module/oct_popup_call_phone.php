@@ -219,7 +219,7 @@ class ControllerOCTemplatesModuleOctPopupCallPhone extends Controller {
                 'name' => '2',
                 'telephone' => '2',
                 'comment' => '1',
-                'mask' => '+38 (999) 999-99-99'
+                'mask' => '8 (999) 999-99-99'
             ]
         ]);
 

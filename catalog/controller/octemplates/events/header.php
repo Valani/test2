@@ -35,8 +35,6 @@ class ControllerOCTemplatesEventsHeader extends Controller {
 		$data['oct_popup_cart_status'] = $this->config->get('theme_oct_showcase_popup_cart_status');
 		$data['body_class'] = isset($this->request->get['product_id']) ? true : false;
 		$data['isbuttoninteractive'] = isset($data['oct_showcase_data']['isbuttoninteractive']) ? true : false;
-		$data['oct_popup_options'] = isset($data['oct_showcase_data']['oct_popup_options']) ? true : false;
-		$data['main_address_html'] = isset($data['oct_showcase_data']['contact_address'][$data['oct_lang_id']]) ? html_entity_decode($data['oct_showcase_data']['contact_address'][$data['oct_lang_id']], ENT_QUOTES, 'UTF-8') : '';
 	}
 
 	private function loadLogoSettings(&$data){
@@ -96,8 +94,8 @@ class ControllerOCTemplatesEventsHeader extends Controller {
 				$data['oct_contact_telephones'][] = html_entity_decode(trim($oct_contact_telephone), ENT_QUOTES, 'UTF-8');
 			}
 		}
-		
 		if (isset($data['oct_showcase_data']['contact_address'])) {
+		
 			foreach ($data['oct_showcase_data']['contact_address'] as $oct_lang_id => $oct_adress) {
 				$data['contact_address'][$oct_lang_id] = html_entity_decode($oct_adress, ENT_QUOTES, 'UTF-8');
 			}

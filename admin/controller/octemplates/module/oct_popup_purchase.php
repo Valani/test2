@@ -180,7 +180,7 @@ class ControllerOCTemplatesModuleOctPopupPurchase extends Controller {
 	                'image' => '1',
 	                'image_width' => $this->config->get('theme_oct_showcase_image_thumb_width'),
 	                'image_height' => $this->config->get('theme_oct_showcase_image_thumb_height'),
-	                'mask' => '+38 (999) 999-99-99',
+	                'mask' => '8 (999) 999-99-99',
 	                'allowed_options' => [],
 	                'notify_email' => $this->config->get('config_email')
 	            ],
@@ -191,7 +191,7 @@ class ControllerOCTemplatesModuleOctPopupPurchase extends Controller {
 	                'popup_cart' => '1',
 	                'cart' => '1',
 	                'order_status_id' => $this->config->get('config_order_status_id'),
-	                'mask' => '+38 (999) 999-99-99',
+	                'mask' => '8 (999) 999-99-99',
 	                'notify_email' => $this->config->get('config_email')
 	            ],
 	            'oct_popup_purchase_template' => $template_text,

@@ -397,7 +397,7 @@ class ControllerOctemplatesModuleOctStockNotifier extends Controller {
                 'phone' => '2',
                 'notify_on_edit' => 1,
                 'custom_message' => 0,
-                'mask' => '+38 (999) 999-99-99'
+                'mask' => '8 (999) 999-99-99'
             ]
         ]);
 
