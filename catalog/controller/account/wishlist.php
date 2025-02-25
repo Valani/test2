@@ -28,7 +28,7 @@ class ControllerAccountWishList extends Controller {
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->setRobots('noindex,nofollow');
+		$this->document->setRobots('noindex,follow');
 
 		$data['breadcrumbs'] = array();
 
@@ -72,9 +72,7 @@ class ControllerAccountWishList extends Controller {
 				if ($product_info['quantity'] <= 0) {
 					$stock = $product_info['stock_status'];
 				} elseif ($this->config->get('config_stock_display')) {
-                    if($product_info['quantity'] > 10){
-                        $stock = '> 10';
-                    }else $stock = $product_info['quantity'];
+					$stock = $product_info['quantity'];
 				} else {
 					$stock = $this->language->get('text_instock');
 				}

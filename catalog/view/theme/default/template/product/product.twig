@@ -1,1797 +1,550 @@
 {{ header }}
-<div id="product-product" class="container-fluid container-lg flex-grow-1 sc-product mobile-no-gutters">
- 	<nav aria-label="breadcrumb">
-        <ul class="breadcrumb sc-breadcrumb fsz-12">
-        {% for breadcrumb in breadcrumbs %}
-            {% if loop.last %}
-                <li class="breadcrumb-item sc-breadcrumb-item">{{ breadcrumb.text }}</li>
-            {% else %}
-                <li class="breadcrumb-item sc-breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+<div id="product-product" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="row"> {% if column_left or column_right %}
+        {% set class = 'col-sm-6' %}
+        {% else %}
+        {% set class = 'col-sm-8' %}
+        {% endif %}
+        <div class="{{ class }}"> {% if thumb or images %}
+          <ul class="thumbnails">
+            {% if thumb %}
+            <li><a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></li>
             {% endif %}
-        {% endfor %}
-        </ul>
-    </nav>
-    {% if oct_showcase_data.micro is defined and oct_showcase_data.micro %}
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement":
-        [
-            {% for breadcrumb in breadcrumbs %}
-                {% if loop.first %}
-                {% else %}
-                {
-                    "@type": "ListItem",
-                    "position": {{ loop.index -1 }},
-                    "item":
-                    {
-                        "@id": "{{ breadcrumb.href }}",
-                        "name": "{{ breadcrumb.text }}"
-                    }
-                }{% if not loop.last %},{% endif %}
-                {% endif %}
+            {% if images %}
+            {% for image in images %}
+            <li class="image-additional"><a class="thumbnail" href="{{ image.popup }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></li>
             {% endfor %}
-        ]
-    }
-    </script>
-    {% endif %}
-    <div class="content-top-box">{{ content_top }}</div>
-    {% if oct_popup_purchase_status is defined and can_buy %}
-        <div class="sc-product-fixed-btns position-fixed d-md-none py-2 px-3">
-            <div class="d-flex align-items-center justify-content-between">
-                {% if (is_rent == 1 or is_remont == 1) %}
-                    <div class="service-cust">
-                        <span>Послуга</span><br>
-                        <span>Замовлення тільки за номером телефону <a href="tel:+380937000090">+38 (093) 700 00 90</a></span>
-                    </div>
+            {% endif %}
+          </ul>
+          {% endif %}
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-description" data-toggle="tab">{{ tab_description }}</a></li>
+            {% if attribute_groups %}
+            <li><a href="#tab-specification" data-toggle="tab">{{ tab_attribute }}</a></li>
+            {% endif %}
+            {% if review_status %}
+            <li><a href="#tab-review" data-toggle="tab">{{ tab_review }}</a></li>
+            {% endif %}
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-description">{{ description }}</div>
+            {% if attribute_groups %}
+            <div class="tab-pane" id="tab-specification">
+              <table class="table table-bordered">
+                {% for attribute_group in attribute_groups %}
+                <thead>
+                  <tr>
+                    <td colspan="2"><strong>{{ attribute_group.name }}</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for attribute in attribute_group.attribute %}
+                <tr>
+                  <td>{{ attribute.name }}</td>
+                  <td>{{ attribute.text }}</td>
+                </tr>
+                {% endfor %}
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+            {% endif %}
+            {% if review_status %}
+            <div class="tab-pane" id="tab-review">
+              <form class="form-horizontal" id="form-review">
+                <div id="review"></div>
+                <h2>{{ text_write }}</h2>
+                {% if review_guest %}
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-name">{{ entry_name }}</label>
+                    <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-review">{{ entry_review }}</label>
+                    <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                    <div class="help-block">{{ text_note }}</div>
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label">{{ entry_rating }}</label>
+                    &nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
+                    <input type="radio" name="rating" value="1" />
+                    &nbsp;
+                    <input type="radio" name="rating" value="2" />
+                    &nbsp;
+                    <input type="radio" name="rating" value="3" />
+                    &nbsp;
+                    <input type="radio" name="rating" value="4" />
+                    &nbsp;
+                    <input type="radio" name="rating" value="5" />
+                    &nbsp;{{ entry_good }}</div>
+                </div>
+                {{ captcha }}
+                <div class="buttons clearfix">
+                  <div class="pull-right">
+                    <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+                  </div>
+                </div>
                 {% else %}
-                    <button type="button" name="button" class="sc-btn sc-btn-outline sc-btn-outline-primary br-4 small fsz-12 sc-product-one-click-btn" onclick="octPopPurchase('{{ product_id }}')">
-                        {{ oct_product_quickbuy }}
-                    </button>
+                {{ text_login }}
                 {% endif %}
-                <div class="sc-module-quantity" hidden>
-                    <input type="hidden" class="form-control" name="quantity" value="{{ minimum }}" id="fixed-input-quantity"/>
-                    <input type="hidden" name="product_id" value="{{ product_id }}"/>
-                    <input type="hidden" id="fixed-min-product-quantity" value="{{ minimum }}" name="min_quantity">
-                </div>
-                <button type="button" class="sc-btn sc-btn-primary small br-4 fsz-12 sc-product-fixed-cart-btn">
-                    <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--btn-cart-icon" alt="" width="16" height="16" class="sc-btn-icon sc-btn-icon-cart-img">
-                    <span class="sc-btn-text">{{ button_cart }}</span>
-                </button>
+              </form>
             </div>
+            {% endif %}</div>
         </div>
-        <script>
-            window.addEventListener('DOMContentLoaded', () => {
-                showProductButtons();
-            });
-        </script>
-    {% endif %}
-    <main class="main">
-        <div class="row">
-            <div class="col-12 sc-page-title pb-3">
-                <h1>{{ heading_title }}</h1>
-            </div>
-        </div>
-        <div id="content" class="row">
-            <div class="col-12 sc-product-tabs-box sticky-md-top">
-                <div id="oct-tabs" class="sc-product-tabs d-flex align-items-stretch w-100">
-                    <div data-tab-target=".breadcrumb" class="sc-product-tab d-flex align-items-center justify-content-center active">
-                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-tab-info-icon" alt="" width="24" height="24">
-                        <span class="sc-product-tab-title ps-2 fsz-14">{{ oct_product_maintab }}</span>
-                    </div>
-                    {% if oct_product_extra_tabs %}
-                        {% set key = 0 %}
-                        {% for extra_tab in oct_product_extra_tabs %}
-                            {% set key = key + 1 %}
-                            <div data-tab-target="#product_extra_tab-{{ key }}" class="sc-product-tab d-flex align-items-center justify-content-center">
-                                <img src="https://nawiteh.ua/image/catalog/menu/models.svg" alt="" width="24" height="24">
-                                <span class="sc-product-tab-title ps-2 fsz-14">{{ extra_tab.title }}</span>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    {% if attribute_groups %}
-                    <div data-tab-target=".sc-product-content-attributes" class="sc-product-tab sc-product-tab-attributes d-flex align-items-center justify-content-center">
-                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-tab-attr-icon" alt="" width="24" height="24">
-                        <span class="sc-product-tab-title ps-2 fsz-14">{{ tab_attribute }}</span>
-                    </div>
-                    {% endif %}
-                    {% if equipment_groups %}
-                    <div data-tab-target=".sc-product-content-equipment" class="sc-product-tab sc-product-tab-equipment d-flex align-items-center justify-content-center">
-                        <img src="https://nawiteh.ua/image/catalog/menu/models.svg" alt="" width="24" height="24">
-                        <span class="sc-product-tab-title ps-2 fsz-14">Сумісні моделі</span>
-                    </div>
-                    {% endif %}
-                    {% if review_status %}
-                    <div data-tab-target=".sc-product-content-reviews" class="sc-product-tab sc-product-tab-reviews d-flex align-items-center justify-content-center">
-                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-tab-reviews-icon" alt="" width="24" height="24">
-                        {{ tab_review }}
-                    </div>
-                    {% endif %}
-                    {% if oct_product_faq %}
-                    <div data-tab-target=".sc-product-content-faq" class="sc-product-tab d-flex align-items-center justify-content-center">
-                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-tab-faq-icon" alt="" width="24" height="24">
-                        {{ tab_oct_faq }}
-                    </div>
-                    {% endif %}
-                    {% if (dop_tab.title is defined and dop_tab.title) and (dop_tab.text is defined and dop_tab.text) %}
-                    <div data-tab-target="#product_dop_tab" class="sc-product-tab d-flex align-items-center justify-content-center">
-                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-tab-extra-icon" alt="" width="24" height="24">
-                        <span class="sc-product-tab-title ps-2 fsz-14">{{ dop_tab.title }}</span>
-                    </div>
-                    {% endif %}
-                    {% if products %}
-                    <div data-tab-target="#sc-related-products_0" class="sc-product-tab d-flex align-items-center justify-content-center">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.48149 7.43827C8.17078 7.80075 8 8.26243 8 8.73985V17C8 18.1046 8.89543 19 10 19H17.3308C18.2974 19 19.1257 18.3088 19.2986 17.3578L20.5713 10.3578C20.7945 9.13009 19.8514 8 18.6036 8H14L15.6279 3.11634C15.8414 2.47579 15.5514 1.77571 14.9475 1.47375V1.47375C14.3906 1.19532 13.7158 1.33161 13.3106 1.80431L8.48149 7.43827Z" stroke="#8F90A6"/>
-                            <path d="M4 18V9" stroke="#8F90A6" stroke-linecap="round"/>
-                        </svg>
-                        <span class="sc-product-tab-title ps-2 fsz-14">{{ oct_related_products }}</span>
-                    </div>
-                    {% endif %}
-                </div>
-                <script>
-                window.addEventListener('DOMContentLoaded', () => {
-                    octProductTabs();
-                });
-                </script>
-            </div>
-            <div id="productImages" class="col-lg-6 mt-md-3">
-                <div class="content-block sc-product-images px-0 pt-3 pt-md-4 mobile-no-radius no-hover-shadow sticky-md-top">
-                    <div class="sc-module-stickers d-flex align-items-center justify-content-between mb-3 px-3 px-md-4">
-                        <div class="sc-module-stickers-left d-flex align-items-center">
-                            {% if special and oct_sticker_you_save %}
-                                <div id="main-product-you-save" class="sc-module-sticker br-4 fsz-10 fw-500 sc-module-sticker-red">{{ you_save }}</div>
-                            {% endif %}
-                            {% if oct_product_stickers %}
-                                {% for key, oct_sticker in oct_product_stickers %}
-                                    {% if oct_sticker is not empty and oct_sticker is iterable %}
-                                        <div class="sc-module-sticker sc-module-sticker-image pe-0 py-0 order-1">
-                                            <img src="{{ oct_sticker.image }}" alt="{{ oct_sticker.title }}" data-bs-html="true" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" title="{{ oct_sticker.title }}" data-bs-content="{{ oct_sticker.description }}" width="24" height="24" />
-                                        </div>
-                                    {% elseif oct_sticker is not empty %}
-                                        <div class="sc-module-sticker br-4 fsz-10 fw-500 sc-module-sticker-{{ key }}">
-                                            {{ oct_sticker }}
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="sc-module-sticker br-4 fsz-10 fw-500 sc-module-sticker-green{% if out_of_stock %} out-of-stock{% endif %}">{% if oct_stock_display and not out_of_stock %} {{ oct_product_config_stock_display }} {% endif %}{{ stock }}</div>
-                    </div>
-                    {% if thumb or images %}
-                        {% if thumb %}
-                            <div class="sc-product-images-main px-3">
-                                <div class="sc-product-images-slide easyzoom easyzoom--overlay pb-3 pb-md-4">
-                                    <a href="{{ popup }}" class="oct-gallery d-block" onclick="return false;">
-                                        <img src="{{ thumb }}" class="d-block mx-auto" alt="{{ heading_title }}" title="{{ heading_title }}" width="{{ thumb_width }}" height="{{ thumb_height }}" />
-                                    </a>
-                                    <div class="hidden-slider easyzoom2 easyzoom--overlay2">
-                                        <a href="{{ popup }}" class="" onclick="return false;">
-                                            <img src="{{ popup }}" class="" alt="{{ heading_title }}" title="{{ heading_title }}" width="2400" width="2400"/>
-                                        </a>
-                                    </div>
-                                </div>
-                                {% for key, image in images %}
-                                    {% set i = key + 1 %}
-                                    {% if loop.index0 > 0 %}
-                                        <div class="sc-product-images-slide easyzoom easyzoom--overlay pb-3 pb-md-4">
-                                            <a href="{{ image.popup }}" class="oct-gallery d-block" onclick="return false;">
-                                                <img src="{{ image.popup }}" class="d-block mx-auto" alt="{{ heading_title }}" title="{{ heading_title }}" width="{{ thumb_width }}" height="{{ thumb_height }}" />
-                                            </a>
-                                            <div class="hidden-slider easyzoom2 easyzoom--overlay2">
-                                                <a href="{{ image.popup }}" class="" onclick="return false;">
-                                                    <img src="{{ image.popup }}" class="" alt="{{ heading_title }}" title="{{ heading_title }}" width="2400" width="2400"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        {% if images %}
-                            <div class="sc-product-images-additional mt-xxl-3 d-none d-md-flex align-items-stretch">
-                                {% for key, image in images %}
-                                    {% set i = key + 1 %}
-                                    <a class="sc-product-images-additional-item" href="{{ image.popup }}" onClick="return false;" data-href="{{ image.popup }}">
-                                        <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" width="{{ image.images_width }}" height="{{ image.images_height }}" />
-                                    </a>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        <script>
-                            $(function() {
-                                setTimeout(function() {
-                                    $('#image-additional').slick('refresh');
-                                    $('.image-additional-box').addClass('overflow-visible');
-                                }, 500);
-
-                                var sliderProducts = $('.sc-product-images-main a.oct-gallery');
-
-                                sliderProducts.on('click', function(e) {
-                                    e.preventDefault();
-
-                                    var totalSlides = $(this).parents('.sc-product-images-main').slick("getSlick").slideCount,
-                                    dataIndex = $(this).parents('.sc-product-images-slide').data('slick-index'),
-                                    trueIndex;
-
-                                    switch(true) {
-                                        case (dataIndex < 0):
-                                            trueIndex = totalSlides+dataIndex;
-
-                                            break;
-                                        case (dataIndex >= totalSlides):
-                                            trueIndex = dataIndex%totalSlides;
-
-                                            break;
-                                        default:
-                                            trueIndex = dataIndex;
-                                    }
-
-                                    $.fancybox.open($(sliderProducts.next()), {backFocus: false, hideScrollbar: false, loop : true}, trueIndex);
-
-                                    return false;
-                                });
-
-                                {% if images %}
-                                $('.sc-product-images-main').slick({
-                                    infinite: true,
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    fade: false,
-                                    draggable: false,
-                                    asNavFor: '.sc-product-images-additional',
-                                    dots: false,
-                                    arrows: false,
-                                    responsive: [
-                                        {
-                                            breakpoint: 768,
-                                            settings: {
-                                                dots: {% if images|length <= 1 %}false{% else %}true{% endif %}
-                                            }
-                                        }
-                                    ]
-                                });
-                                $('.sc-product-images-additional').slick({
-                                    infinite: {% if images|length > 3 %}true{% else %}false{% endif %},
-                                    slidesToShow: 6,
-                                    slidesToScroll: 1,
-                                    focusOnSelect: true,
-                                    asNavFor: '.sc-product-images-main',
-                                    dots: false,
-                                    prevArrow: '<button type="button" class="slick-slider-btn slick-slider-btn-prev sc-btn sc-btn-outline sc-btn-outline-secondary sc-btn-with-icon br-4 overflow-hidden"><span class="sc-btn-icon" aria-label="Previous"></span></button>',
-                                    nextArrow: '<button type="button" class="slick-slider-btn slick-slider-btn-next sc-btn sc-btn-outline sc-btn-outline-secondary sc-btn-with-icon br-4 overflow-hidden"><span class="sc-btn-icon" aria-label="Next"></span></button>',
-                                    responsive: [
-                                        {
-                                            breakpoint: 1600,
-                                            settings: {
-                                                slidesToShow: 6,
-                                                slidesToScroll: 1
-                                            }
-                                        }, {
-                                            breakpoint: 1200,
-                                            settings: {
-                                                slidesToShow: 6,
-                                                slidesToScroll: 1
-                                            }
-                                        }, {
-                                            breakpoint: 992,
-                                            settings: {
-                                                slidesToShow: 6,
-                                                slidesToScroll: 1
-                                            }
-                                        }, {
-                                            breakpoint: 376,
-                                            settings: {
-                                                slidesToShow: 6,
-                                                slidesToScroll: 1
-                                            }
-                                        }
-                                    ]
-                                });
-                                {% else %}
-                                    $('.sc-product-images-main').slick({});
-                                {% endif %}
-                            });
-                        </script>
-                    {% endif %}
-                </div>
-            </div>
-            <div id="product" class="col-lg-6 mt-3">
-                <div class="sc-product-info d-flex flex-column flex-md-row flex-lg-column flex-xl-row align-items-start align-items-md-center align-items-lg-start align-items-xl-center justify-content-between fsz-12 light-text">
-                    <div class="d-flex align-items-center justify-content-between w-100 gap-4">
-                        <div class="sc-product-info-left d-flex flex-column align-items-start">
-                            {% if sku %}
-                                <div class="sc-product-info-item p-1 br-4">
-                                    <span class="fw-medium dark-text">{{ text_model }}:</span>
-                                    <span class="ms-2" style="color: #666;">{{ sku }}</span>
-                                </div>
-                            {% endif %}
-                            
-                            {% if manufacturer %}
-                                <div class="sc-product-info-item p-1 br-4 mt-2">
-                                    <span class="fw-medium dark-text">{{ text_manufacturer }}:</span>
-                                    <span class="ms-2">
-                                        <a href="{{ manufacturers }}" class="blue-link">{{ manufacturer }}</a>
-                                    </span>
-                                </div>
-                            {% endif %}
-                        </div>
-                        
-                        {% if manufacturer_image %}
-                            <style>
-                                .manufacturer-logo {
-                                    height: 6rem;
-                                }
-                                .manufacturer-logo img {
-                                    max-height: 100%;
-                                    width: auto;
-                                    max-width: 200px;
-                                    object-fit: contain;
-                                }
-                                @media (max-width: 768px) {
-                                    .manufacturer-logo {
-                                        height: 4rem;
-                                    }
-                                    .manufacturer-logo img {
-                                        max-width: 140px;
-                                    }
-                                }
-                            </style>
-
-                            <a href="{{ manufacturers }}" class="manufacturer-logo d-flex align-items-center">
-                                <img src="{{ manufacturer_image }}" 
-                                    alt="{{ manufacturer }}" />
-                            </a>
-                            {% endif %}
-                    </div>
-                </div>
-                <div class="content-block sc-product-actions mt-3 p-0 mobile-no-radius no-hover-shadow">
-                    <div class="sc-product-actions-top d-flex justify-content-between p-3 pb-4{% if can_buy %} with-border{% endif %}">
-                        <div class="sc-product-actions-top-left">
-                            {% if oct_popup_found_cheaper_status is defined and oct_popup_found_cheaper_status == 'on' and can_buy %}
-                                <span class="blue-link fsz-12" onclick="octPopupFoundCheaper('{{ product_id }}');">{{ oct_product_cheaper }}</span>
-                            {% endif %}
-                            {% if price %}
-                                <div class="sc-module-price-box pt-3">
-                                    {% if not special %}
-                                        <div class="sc-module-price fw-800 dark-text mt-1 fsz-20">{{ price }}</div>
-                                    {% else %}
-                                        <div class="sc-module-price-old light-text fsz-14">{{ price }}</div>
-                                        <div class="sc-module-price fw-800 dark-text mt-1 fsz-20">{{ special }}</div>
-                                        {% if product_timer %}
-                                            <div class="sc-product-timer d-flex-inline mt-2">
-                                                <div class="sc-product-timer-text dark-text fw-600 fsz-12">{{ oct_product_timer }}</div>
-                                                <div class="sc-product-timer-inner d-inline-flex align-items-start justify-content-center">
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <div id="sc-timer-days" class="sc-product-timer-number red fw-600"></div>
-                                                        <span class="dark-text fsz-10">{{ oct_product_timer_days }}</span>
-                                                    </div>
-                                                    <div class="sc-product-timer-delimiter animated">:</div>
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <div id="sc-timer-hours" class="sc-product-timer-number red fw-600"></div>
-                                                        <span class="dark-text fsz-10">{{ oct_product_timer_hours }}</span>
-                                                    </div>
-                                                    <div class="sc-product-timer-delimiter animated">:</div>
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <div id="sc-timer-minutes" class="sc-product-timer-number red fw-600"></div>
-                                                        <span class="dark-text fsz-10">{{ oct_product_timer_minutes }}</span>
-                                                    </div>
-                                                    <div class="sc-product-timer-delimiter animated">:</div>
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <div id="sc-timer-seconds" class="sc-product-timer-number red fw-600"></div>
-                                                        <span class="dark-text fsz-10">{{ oct_product_timer_seconds }}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <script>
-                                                timerSpecial('.sc-product-timer', '{{ special_date_end }}T00:00:00');
-                                            </script>
-                                        {% endif %}
-                                    {% endif %}
-                                    {% if tax %}
-                                        <div class="price-tax fsz-10 fw-300 mt-1">{{ text_tax }}
-                                            <span>{{ tax }}</span>
-                                        </div>
-                                    {% endif %}
-                                    {% if discounts %}
-                                        {% for discount in discounts %}
-                                            <div class="sc-product-price-discount fsz-12 mt-1">{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</div>
-                                        {% endfor %}
-                                    {% endif %}
-                                    {% if minimum > 1 %}
-                                        <div class="sc-product-option-minquant fsz-12 mt-1">{{ text_minimum }}</div>
-                                    {% endif %}
-                                    {% if points %}
-                                        <div class="sc-product-option-bonus fsz-12 mt-1">{{ text_points }}
-                                            {{ points }}</div>
-                                    {% endif %}
-                                    {% if reward %}
-                                        <div class="sc-product-option-bonus fsz-12 mt-1">{{ text_reward }}
-                                            {{ reward }}</div>
-                                    {% endif %}
-                                    {% if recurrings %}
-                                        <div class="form-group d-flex flex-column flex-md-row align-items-md-center">
-                                            <div class="sc-control-label fw-600 dark-text fsz-14">{{ text_payment_recurring }}
-                                                <span class="required"> *</span></div>
-                                            <div class="form-group">
-                                                <select name="recurring_id" class="sc-select form-control">
-                                                    <option value="">{{ text_select }}</option>
-                                                    {% for recurring in recurrings %}
-                                                        <option value="{{ recurring.recurring_id }}">{{ recurring.name }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                                <div class="help-block" id="recurring-description"></div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                            {% if (is_rent == 1 or is_remont == 1) %}
-                                <div class="service-cust">
-                                    <span>Послуга</span><br>
-                                    <span>Замовлення тільки за номером телефону <a href="tel:+380937000090">+38 (093) 700 00 90</a></span>
-                                </div>
-                            {% else %}
-                                {% if oct_popup_purchase_status is defined and can_buy %}
-                                    <button type="button" class="sc-btn sc-btn-secondary d-none d-md-flex br-4 fsz-12 fw-400 mt-3 sc-product-one-click-btn" onclick="octPopPurchase('{{ product_id }}')"><span class="sc-btn-text">{{ oct_product_quickbuy }}</span></button>
-                                {% endif %}
-                            {% endif %}
-                            {% if product_js_button is defined and product_js_button %}
-                                <div class="sc-product-social-buttons mt-3">{{ product_js_button }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="sc-product-actions-top-right d-flex align-items-start gap-2">
-                            <button type="button" class="sc-btn sc-btn-secondary sc-btn-with-icon br-4 sc-wishlist-btn" onclick="wishlist.add('{{ product_id }}');" title="{{ button_wishlist }}" aria-label="Wishlist button">
-                                <span class="sc-btn-icon sc-btn-icon-wishlist"></span>
-                            </button>
-                            <button type="button" class="sc-btn sc-btn-secondary sc-btn-with-icon br-4 sc-compare-btn" onclick="compare.add('{{ product_id }}');" title="{{ button_compare }}" aria-label="Compare button">
-                                <span class="sc-btn-icon sc-btn-icon-compare"></span>
-                            </button>
-                        </div>
-                    </div>
-                    {% if can_buy %}
-                        <div class="sc-product-actions-middle px-3 py-4">
-                            {% if options %}
-                                <div id="sc-product-options" class="sc-product-options mb-4">
-                                    {% for option in options %}
-                                        {% if option.type == 'select' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14 mb-2" for="input-option{{ option.product_option_id }}">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>
-                                                    {% endif %}
-                                                </label>
-                                                <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="sc-select form-control">
-                                                    <option value="">{{ text_select }}</option>
-                                                    {% for option_value in option.product_option_value %}
-                                                        <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
-                                                            {% if option_value.price %}
-                                                                ({{ option_value.price_prefix }}{{ option_value.price }})
-                                                            {% endif %}
-                                                        </option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'radio' %}
-                                            <div class="form-group d-flex flex-column flex-md-row align-items-md-center mb-3">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </label>
-                                                <div id="input-option{{ option.product_option_id }}" class="options-box d-flex mt-3 mt-sm-0">
-                                                    {% for option_value in option.product_option_value %}
-                                                        <div class="radio">
-                                                            <label
-                                                                data-bs-toggle="tooltip"
-                                                                data-bs-placement="top"
-                                                                class="option optid-{{ option.product_option_id }} not-selected{% if option_value.image %} radio-img{% else %} sc-radio{% endif %}{% if option.option_id in allowed_options_ids and loop.index == 1 %} auto-choose{% endif %}"
-                                                                title="{{ option_value.name }} {% if option_value.price %}{{ option_value.price_prefix }}{{ option_value.price }}{% endif %}">
-                                                                <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" class="input-radio"/>
-                                                                {% if option_value.image %}
-                                                                    <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" width="50" height="50" />
-                                                                {% else %}
-                                                                    {{ option_value.name }}
-                                                                {% endif %}
-                                                            </label>
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    $(document).on('click', 'label.optid-{{ option.product_option_id }}', function(event) {
-                                                                        $('label.optid-{{ option.product_option_id }}').removeClass('selected').addClass('not-selected');
-                                                                        $(this).removeClass('not-selected').addClass('selected');
-                                                                    });
-                                                                });
-                                                            </script>
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'checkbox' %}
-                                            <div class="form-checkbox-group mb-3">
-                                                <div class="sc-control-label fw-600 dark-text fsz-14 mb-2">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </div>
-                                                <div id="input-option{{ option.product_option_id }}">
-                                                    {% for option_value in option.product_option_value %}
-                                                        <div class="form-check d-flex align-items-center mb-0">
-                                                            <label class="form-check-label">
-                                                                {% if option_value.image %}<img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" width="50" height="50" />{% endif %}
-                                                                <input type="checkbox" id="option[{{ option.product_option_id }}][{{ option_value.product_option_value_id }}]" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" class="form-check-input"/>
-                                                                {{ option_value.name }}
-                                                                {% if option_value.price %}
-                                                                    ({{ option_value.price_prefix }}{{ option_value.price }})
-                                                                {% endif %}
-                                                            </label>
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'text' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14" for="input-option{{ option.product_option_id }}">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>
-                                                    {% endif %}
-                                                </label>
-                                                <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control" inputmode="text">
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'textarea' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14" for="input-option{{ option.product_option_id }}">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </label>
-                                                <textarea name="option[{{ option.product_option_id }}]" rows="5" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control">{{ option.value }}</textarea>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'file' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </label>
-                                                <button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="sc-btn sc-btn-primary br-4">
-                                                    <i class="fa fa-upload me-2"></i>
-                                                    {{ button_upload }}</button>
-                                                <input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id }}"/>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'date' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14" for="input-option{{ option.product_option_id }}">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </label>
-                                                <div class="input-group date">
-                                                    <input type="date" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" id="input-option{{ option.product_option_id }}" class="form-control"/>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'datetime' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14" for="input-option{{ option.product_option_id }}">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </label>
-                                                <div class="input-group datetime">
-                                                    <input type="datetime-local" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" id="input-option{{ option.product_option_id }}" class="form-control"/>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                        {% if option.type == 'time' %}
-                                            <div class="form-group">
-                                                <label class="sc-control-label fw-600 dark-text fsz-14" for="input-option{{ option.product_option_id }}">{{ option.name }}
-                                                    {% if option.required %}
-                                                        <span class="required option-required"> *</span>{% endif %}
-                                                </label>
-                                                <div class="input-group time">
-                                                    <input type="time" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" id="input-option{{ option.product_option_id }}" class="form-control"/>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                            <div class="sc-product-buttons d-flex align-items-start">
-                                {% if is_rent == 0 %}
-                                <div class="wrapper-m0quantity">
-                                    <div class="sc-module-quantity d-flex align-items-center justify-content-center py-1 br-12 {% if (is_rent == 1 or is_remont == 1) %}hidden{% endif %}">
-                                        <button type="button" aria-label="Minus" class="sc-module-quantity-btn d-flex align-items-center justify-content-center" onclick="updateValueProduct(true, false, false);">
-                                            <span class="minus"></span>
-                                        </button>
-                                        <input type="text" class="form-control" name="quantity" value="{{ minimum }}" id="input-quantity" aria-label="Quantity" inputmode="numeric">
-                                        <button type="button" aria-label="Plus" class="sc-module-quantity-btn d-flex align-items-center justify-content-center" onclick="updateValueProduct(false, true, false);">
-                                            <span class="plus"></span>
-                                        </button>
-                                        <input type="hidden" name="product_id" value="{{ product_id }}"/>
-                                        <input type="hidden" id="min-product-quantity" value="{{ minimum }}" name="min_quantity">
-                                        <input type="hidden" id="max-product-quantity" value="{{ max_quantity }}" name="max_quantity">
-                                    </div>
-                                    <div id="spec-out-new1" class="sc-module-sticker br-4 fsz-10 fw-500 spec-out-new fblack">{% if oct_stock_display and not out_of_stock %} {{ oct_product_config_stock_display }} {% endif %}{{ stock }}</div>
-                                </div>
-                                {% endif %}
-                                <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="sc-btn sc-btn-primary br-4 {% if (is_rent == 1 or is_remont == 1) %}hidden{% endif %} ">
-                                    <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--btn-cart-icon" alt="" width="20" height="20" class="sc-btn-icon sc-btn-icon-cart-img">
-                                    <span class="sc-btn-text">Купити</span>
-                                </button>
-                                {% if (is_rent == 1 or is_remont == 1) %}
-                                    <button type="button" id="button-cart-book" data-loading-text="{{ text_loading }}" class="sc-btn sc-btn-primary br-4" onclick="octPopupCallPhone();">
-                                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--btn-cart-icon" alt="" width="20" height="20" class="sc-btn-icon sc-btn-icon-cart-img">
-                                        <span class="sc-btn-text">Замовити</span>
-                                    </button>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {{ oct_byoneclick }}
-                    {% else %}
-                        {% if oct_stock_notifier_status is defined and oct_stock_notifier_status is not empty %}
-                            <div class="px-3 pb-3">
-                                <button onclick="octStockNotifier('{{ product_id }}');" type="button" class="sc-btn sc-btn-primary br-4 sc-stock-notifier-btn">
-                                    <span class="sc-btn-text">{{ oct_stock_notifier_text }}</span>
-                                </button>
-                            </div>
-                            <script>
-                            function octStockNotifier(product_id) {
-                                masked('body', true);
-
-                                $(".modal-backdrop").remove();
-
-                                $.ajax({
-                                    type: 'post',
-                                    dataType: 'html',
-                                    url: 'index.php?route=octemplates/module/oct_stock_notifier',
-                                    data: 'product_id=' + product_id,
-                                    cache: false,
-                                    success: function (data) {
-                                        masked('body', false);
-                                        $(".modal-holder").html(data);
-                                        $("#octStockNotifier").modal("show");
-                                        popupClose();
-                                    }
-                                });
-                            }
-                            </script>
-                        {% endif %}
-                    {% endif %}
-                </div>
-                 {% if oct_attributs %}
-                    <div class="sc-product-attr d-none d-md-block">
-                        <div class="sc-product-attr-title p-3">
-                            <span class="fsz-14 dark-text fw-600">{{ oct_product_attributes }}</span>
-                            <span class="blue-link fsz-12" id="attr-quick-view" onclick="scrollToElement('.sc-product-content-attributes', '.sc-product-tab-attributes', -140);">{{ oct_product_attributes_seeall }}</span>
-                        </div>
-                        <div class="sc-product-attr-list fsz-14">
-                            {% for attribute in oct_attributs %}
-                            <div class="sc-product-attr-list-item d-flex">
-                                <div class="dark-text fw-500 fsz-14">{{ attribute.name }}</div>
-                                <div>{{ attribute.text }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-            <div class="sc-product-content col-12">
-                <div class="row g-0">
-                    <div class="col-lg-8 col-xl-9 sc-product-content-left py-3 py-lg-4 order-1 order-lg-0">
-                        {% if description %}
-                            <div class="sc-product-content-description pb-4 mb-md-4 px-3 px-lg-4">
-                                <div class="sc-product-content-title d-flex align-items-center">
-                                    <div class="sc-product-content-title-icon d-flex align-items-center justify-content-center br-4">
-                                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-content-description-icon" alt="" width="16" height="16">
-                                    </div>
-                                    <span class="fsz-24 fw-600 dark-text">{{ oct_product_description }}</span>
-                                </div>
-                                <div class="sc-product-content-text dark-text fsz-14 mt-3">
-                                    {{ description }}
-                                    {% if tags %}
-                                        <p class="sc-product-tags">{{ text_tags }}
-                                            {% for i in 0..tags | length - 1 %}
-                                                <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a>{% if i < (tags|length - 1) %},{% endif %}
-                                            {% endfor %}
-                                        </p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if oct_product_extra_tabs %}
-                            {% set key = 0 %}
-                            {% for extra_tab in oct_product_extra_tabs %}
-                                {% set key = key + 1 %}
-                                    <div id="product_extra_tab-{{ key }}" class="sc-product-content-info pt-4 pt-md-0 px-3 px-lg-4">
-                                        <div class="sc-product-content-title d-flex align-items-center">
-                                            <div class="sc-product-content-title-icon d-flex align-items-center justify-content-center br-4">
-                                                <img src="https://nawiteh.ua/image/catalog/menu/models.svg" alt="" width="16" height="16">
-                                            </div>
-                                            <span class="fsz-24 fw-600 dark-text">{{ extra_tab.title }}</span>
-                                        </div>
-                                        <div class="sc-product-content-text dark-text fsz-14 mt-3">{{ extra_tab.text }}</div>
-                                    </div>
-                            {% endfor %}
-                        {% endif %}
-                        {% if attribute_groups %}
-                            <div class="sc-product-content-attributes pb-4 mb-md-4 pt-4 pt-md-0 px-3 px-lg-4">
-                                <div class="sc-product-content-title d-flex align-items-center">
-                                    <div class="sc-product-content-title-icon d-flex align-items-center justify-content-center br-4">
-                                        <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-content-attrs-icon" alt="" width="16" height="16">
-                                    </div>
-                                    <span class="fsz-24 fw-600 dark-text">{{ oct_product_attributes_tab }}</span>
-                                </div>
-                                <div class="dark-text fsz-14 mt-3">
-                                    {% for attribute_group in attribute_groups %}
-                                        <div class="sc-product-content-attributes-list">
-                                            {% for attribute in attribute_group.attribute %}
-                                                <div class="sc-product-content-attributes-list-item d-flex justify-content-between">
-                                                    <div>{{ attribute.name }}</div>
-                                                    <div>{{ attribute.text }}</div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if equipment_groups %}
-                            <div class="sc-product-content-equipment pb-4 mb-4 pt-4 pt-md-0 px-3 px-lg-4">
-                                <div class="sc-product-content-title d-flex align-items-center">
-                                    <div class="sc-product-content-title-icon d-flex align-items-center justify-content-center br-4">
-                                        <img src="https://nawiteh.ua/image/catalog/menu/models.svg" alt="" width="16" height="16">
-                                    </div>
-                                    <span class="fsz-24 fw-600 dark-text">Сумісні моделі:</span>
-                                </div>
-                                
-                                {# Desktop version #}
-                                <div class="dark-text fsz-14 mt-3 d-none d-md-block">
-                                    <div class="equipment-table-wrapper">
-                                        <table class="w-100" style="border-collapse: collapse; margin-bottom: 1rem;">
-                                            <thead>
-                                                <tr>
-                                                    <th style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left; background-color: #F1BC0F; color: #212121; font-weight: 600;">Тип</th>
-                                                    <th style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left; background-color: #F1BC0F; color: #212121; font-weight: 600;">Серія</th>
-                                                    <th style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left; background-color: #F1BC0F; color: #212121; font-weight: 600;">Сумісні моделі</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% set has_hidden_series = false %}
-                                                {% for brand, types in equipment_groups %}
-                                                    <tr>
-                                                        <td colspan="3" style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left; background-color: #EDEDED; color: #212121; font-weight: 600;">{{ brand }}</td>
-                                                    </tr>
-                                                    {% for type, series in types %}
-                                                        {% set first_series = true %}
-                                                        {% for series_name, models in series %}
-                                                            {% if first_series %}
-                                                                <tr>
-                                                                    <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">{{ type }}</td>
-                                                                    <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">{{ series_name != 'default' ? series_name : '' }}</td>
-                                                                    <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">
-                                                                        {% for model in models %}
-                                                                            {{ model }}<br>
-                                                                        {% endfor %}
-                                                                    </td>
-                                                                </tr>
-                                                                {% set first_series = false %}
-                                                            {% else %}
-                                                                <tr class="hidden-row" style="display: none;">
-                                                                    <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">{{ type }}</td>
-                                                                    <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">{{ series_name != 'default' ? series_name : '' }}</td>
-                                                                    <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">
-                                                                        {% for model in models %}
-                                                                            {{ model }}<br>
-                                                                        {% endfor %}
-                                                                    </td>
-                                                                </tr>
-                                                                {% set has_hidden_series = true %}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% endfor %}
-                                                {% endfor %}
-                                                {% if has_more_equipment %}
-                                                    <tr class="show-more-row">
-                                                        <td colspan="3" style="border: 1px solid #EDEDED; padding: 0.75rem;">
-                                                            <button type="button" class="load-more-equipment" 
-                                                                    style="background-color: #F8F8F8; border: 1px solid #EDEDED; color: #212121; padding: 0.75rem; width: 100%; text-align: center; cursor: pointer;" 
-                                                                    onmouseover="this.style.backgroundColor='#F1BC0F'" 
-                                                                    onmouseout="this.style.backgroundColor='#F8F8F8'" 
-                                                                    onclick="loadMoreEquipment(this)" 
-                                                                    data-product-id="{{ product_id }}"
-                                                                    data-has-more="{{ has_more_equipment ? 'true' : 'false' }}">
-                                                                Показати ще
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                {# Mobile version #}
-                                <div class="dark-text fsz-14 mt-3 d-md-none">
-                                    <div class="equipment-accordion">
-                                        {% set has_hidden_content = false %}
-                                        {% for brand, types in equipment_groups %}
-                                            <div class="mb-3" style="background-color: #EDEDED; padding: 0.75rem; font-weight: 600; border-radius: 4px;">{{ brand }}</div>
-                                            {% for type, series in types %}
-                                                {% set first_series = true %}
-                                                <div class="mb-3" style="border: 1px solid #EDEDED;">
-                                                    <div class="equipment-type-content" style="background: white;">
-                                                        {% for series_name, models in series %}
-                                                            {% if first_series %}
-                                                                <div class="p-3" style="border-bottom: 1px solid #EDEDED;">
-                                                                    <div class="fw-600 mb-2">{{ type }}</div>
-                                                                    {% if series_name != 'default' %}
-                                                                        <div class="fw-600 mb-2">{{ series_name }}</div>
-                                                                    {% endif %}
-                                                                    <div>{{ models|join('<br>')|raw }}</div>
-                                                                </div>
-                                                                {% set first_series = false %}
-                                                            {% else %}
-                                                                <div class="hidden-series p-3" style="display: none; border-bottom: 1px solid #EDEDED;">
-                                                                    <div class="fw-600 mb-2">{{ type }}</div>
-                                                                    {% if series_name != 'default' %}
-                                                                        <div class="fw-600 mb-2">{{ series_name }}</div>
-                                                                    {% endif %}
-                                                                    <div>{{ models|join('<br>')|raw }}</div>
-                                                                </div>
-                                                                {% set has_hidden_content = true %}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                        {% endfor %}
-                                        {% if has_hidden_content or has_more_equipment %}
-                                            <div class="p-3 show-more-container">
-                                                <button type="button" 
-                                                        class="load-more-equipment"
-                                                        style="background-color: #F8F8F8; border: 1px solid #EDEDED; color: #212121; padding: 0.75rem; width: 100%; text-align: center; cursor: pointer;" 
-                                                        onmouseover="this.style.backgroundColor='#F1BC0F'" 
-                                                        onmouseout="this.style.backgroundColor='#F8F8F8'" 
-                                                        onclick="showMoreMobileSeries(this)"
-                                                        data-product-id="{{ product_id }}"
-                                                        data-has-more="{{ has_more_equipment ? 'true' : 'false' }}">
-                                                    Показати ще
-                                                </button>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <script>
-                            function showMoreSeries(button) {
-                                const table = button.closest('tbody');
-                                const hiddenRows = table.querySelectorAll('.hidden-row');
-                                
-                                hiddenRows.forEach(row => {
-                                    row.style.display = 'table-row';
-                                });
-                                
-                                button.closest('.show-more-row').style.display = 'none';
-                            }
-
-                            function toggleAccordion(header) {
-                                const content = header.nextElementSibling;
-                                const icon = header.querySelector('.accordion-icon');
-                                
-                                if (content.style.display === 'none') {
-                                    content.style.display = 'block';
-                                    icon.style.transform = 'rotate(180deg)';
-                                } else {
-                                    content.style.display = 'none';
-                                    icon.style.transform = 'rotate(0deg)';
-                                }
-                            }
-
-                            function handleEquipmentVisibility() {
-                                // Desktop table handler
-                                const desktopTable = document.querySelector('.equipment-table-wrapper table');
-                                if (desktopTable) {
-                                    const hiddenRows = desktopTable.querySelectorAll('.hidden-row');
-                                    const showMoreRow = desktopTable.querySelector('.show-more-row');
-                                    
-                                    if (showMoreRow) {
-                                        const loadMoreButton = showMoreRow.querySelector('.load-more-equipment');
-                                        const hasMore = loadMoreButton.getAttribute('data-has-more') === 'true';
-                                        
-                                        // Показуємо кнопку тільки якщо є приховані рядки АБО є додаткові дані на сервері
-                                        if (hiddenRows.length === 0 && !hasMore) {
-                                            showMoreRow.style.display = 'none';
-                                        }
-                                    }
-                                }
-
-                                // Mobile accordion handler
-                                const mobileAccordion = document.querySelector('.equipment-accordion');
-                                if (mobileAccordion) {
-                                    const hiddenSeries = mobileAccordion.querySelectorAll('.hidden-series');
-                                    const showMoreContainer = mobileAccordion.querySelector('.show-more-container');
-                                    
-                                    if (showMoreContainer) {
-                                        const loadMoreButton = showMoreContainer.querySelector('.load-more-equipment');
-                                        const hasMore = loadMoreButton.getAttribute('data-has-more') === 'true';
-                                        
-                                        // Показуємо кнопку тільки якщо є приховані серії АБО є додаткові дані на сервері
-                                        if (hiddenSeries.length === 0 && !hasMore) {
-                                            showMoreContainer.style.display = 'none';
-                                        }
-                                    }
-                                }
-                            }
-
-                            function showMoreMobileSeries(button) {
-                                const productId = button.getAttribute('data-product-id');
-                                const hasMore = button.getAttribute('data-has-more') === 'true';
-                                const accordion = document.querySelector('.equipment-accordion');
-                                
-                                const hiddenSeries = accordion.querySelectorAll('.hidden-series');
-                                hiddenSeries.forEach(series => {
-                                    series.style.display = 'block';
-                                    series.classList.remove('hidden-series');
-                                });
-                                
-                                if (!hasMore) {
-                                    button.closest('.show-more-container').remove();
-                                    return;
-                                }
-
-                                if (hasMore) {
-                                    button.disabled = true;
-                                    button.innerHTML = 'Завантаження...';
-                                    
-                                    // Використовуємо той самий URL і заголовки, що й на десктопі
-                                    fetch(`index.php?route=product/product/equipment&product_id=${productId}`, {
-                                        headers: {
-                                            'Accept': 'application/json',
-                                            'X-Requested-With': 'XMLHttpRequest'
-                                        }
-                                    })
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            throw new Error(`HTTP error! status: ${response.status}`);
-                                        }
-                                        return response.json();
-                                    })
-                                    .then(data => {
-                                        if (data.success) {
-                                            // Add new equipment groups
-                                            for (const [brand, types] of Object.entries(data.equipment_groups)) {
-                                                let brandExists = false;
-                                                
-                                                // Check if brand section already exists
-                                                accordion.querySelectorAll('.mb-3').forEach(section => {
-                                                    if (section.textContent.trim() === brand) {
-                                                        brandExists = true;
-                                                        const typeContent = section.nextElementSibling;
-                                                        
-                                                        // Add new types to existing brand
-                                                        for (const [type, series] of Object.entries(types)) {
-                                                            for (const [seriesName, models] of Object.entries(series)) {
-                                                                const newContent = document.createElement('div');
-                                                                newContent.className = 'p-3';
-                                                                newContent.style.borderBottom = '1px solid #EDEDED';
-                                                                newContent.innerHTML = `
-                                                                    <div class="fw-600 mb-2">${type}</div>
-                                                                    ${seriesName !== 'default' ? `<div class="fw-600 mb-2">${seriesName}</div>` : ''}
-                                                                    <div>${models.join('<br>')}</div>
-                                                                `;
-                                                                typeContent.querySelector('.equipment-type-content').appendChild(newContent);
-                                                            }
-                                                        }
-                                                    }
-                                                });
-                                                
-                                                // If brand doesn't exist, create new brand section
-                                                if (!brandExists) {
-                                                    const brandHtml = `
-                                                        <div class="mb-3" style="background-color: #EDEDED; padding: 0.75rem; font-weight: 600; border-radius: 4px;">${brand}</div>
-                                                    `;
-                                                    
-                                                    // Insert before the show-more-container
-                                                    const showMoreContainer = accordion.querySelector('.show-more-container');
-                                                    showMoreContainer.insertAdjacentHTML('beforebegin', brandHtml);
-                                                    
-                                                    for (const [type, series] of Object.entries(types)) {
-                                                        const typeHtml = `
-                                                            <div class="mb-3" style="border: 1px solid #EDEDED;">
-                                                                <div class="equipment-type-content" style="background: white;">
-                                                        `;
-                                                        
-                                                        let seriesHtml = '';
-                                                        for (const [seriesName, models] of Object.entries(series)) {
-                                                            seriesHtml += `
-                                                                <div class="p-3" style="border-bottom: 1px solid #EDEDED;">
-                                                                    <div class="fw-600 mb-2">${type}</div>
-                                                                    ${seriesName !== 'default' ? `<div class="fw-600 mb-2">${seriesName}</div>` : ''}
-                                                                    <div>${models.join('<br>')}</div>
-                                                                </div>
-                                                            `;
-                                                        }
-                                                        
-                                                        const closingHtml = `
-                                                                </div>
-                                                            </div>
-                                                        `;
-                                                        
-                                                        showMoreContainer.insertAdjacentHTML('beforebegin', typeHtml + seriesHtml + closingHtml);
-                                                    }
-                                                }
-                                            }
-                                            // Remove the button after loading all content
-                                            button.closest('.show-more-container').remove();
-                                        } else {
-                                            throw new Error(data.error || 'Помилка завантаження даних');
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error loading more equipment:', error);
-                                        button.disabled = false;
-                                        button.innerHTML = 'Показати ще';
-                                        alert('Помилка завантаження даних. Спробуйте ще раз.');
-                                    });
-                                }
-                            }
-
-                            function loadMoreEquipment(button) {
-                                const productId = button.getAttribute('data-product-id');
-                                const hasMore = button.getAttribute('data-has-more') === 'true';
-                                const tbody = button.closest('tbody');
-                                const hiddenRows = tbody.querySelectorAll('.hidden-row');
-                                
-                                // Show hidden rows first if they exist
-                                if (hiddenRows.length > 0) {
-                                    hiddenRows.forEach(row => {
-                                        row.style.display = 'table-row';
-                                        row.classList.remove('hidden-row');
-                                    });
-                                    button.closest('.show-more-row').remove();
-                                    return;
-                                }
-                                
-                                // If no more data to load, remove button
-                                if (!hasMore) {
-                                    button.closest('.show-more-row').remove();
-                                    return;
-                                }
-                                button.disabled = true;
-                                button.innerHTML = 'Завантаження...';
-                                
-                                // Змінюємо URL на новий метод
-                                fetch(`index.php?route=product/product/equipment&product_id=${productId}`, {
-                                    headers: {
-                                        'Accept': 'application/json',
-                                        'X-Requested-With': 'XMLHttpRequest'
-                                    }
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error(`HTTP error! status: ${response.status}`);
-                                    }
-                                    return response.json();
-                                })
-                                .then(data => {
-                                    if (data.success) {
-                                        let newRows = '';
-                                        
-                                        for (const [brand, types] of Object.entries(data.equipment_groups)) {
-                                            newRows += `<tr>
-                                                <td colspan="3" style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left; background-color: #EDEDED; color: #212121; font-weight: 600;">${brand}</td>
-                                            </tr>`;
-                                            
-                                            for (const [type, series] of Object.entries(types)) {
-                                                for (const [seriesName, models] of Object.entries(series)) {
-                                                    newRows += `<tr>
-                                                        <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">${type}</td>
-                                                        <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">${seriesName !== 'default' ? seriesName : ''}</td>
-                                                        <td style="border: 1px solid #EDEDED; padding: 0.75rem; text-align: left;">${models.join('<br>')}</td>
-                                                    </tr>`;
-                                                }
-                                            }
-                                        }
-                                        
-                                        // Вставляємо нові рядки перед кнопкою
-                                        button.closest('tr').insertAdjacentHTML('beforebegin', newRows);
-                                        // Видаляємо рядок з кнопкою
-                                        button.closest('tr').remove();
-                                    } else {
-                                        throw new Error(data.error || 'Помилка завантаження даних');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error loading more equipment:', error);
-                                    button.disabled = false;
-                                    button.innerHTML = 'Показати ще';
-                                    alert('Помилка завантаження даних. Спробуйте ще раз.');
-                                });
-                            }
-                            document.addEventListener('DOMContentLoaded', handleEquipmentVisibility);
-                            </script>
-                        {% endif %}
-                        {% if review_status %}
-                            <div class="sc-product-content-reviews pb-4 mb-md-4 pt-4 pt-md-0 px-3 px-lg-4">
-                                <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-md-between">
-                                    <div class="mb-4 mb-md-0">
-                                        <div class="sc-product-content-title d-flex align-items-center">
-                                            <div class="sc-product-content-title-icon d-flex align-items-center justify-content-center br-4">
-                                                <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--product-content-reviews-icon" alt="" width="16" height="16">
-                                            </div>
-                                            <span class="fsz-24 fw-600 dark-text">{{ tab_review_view }}</span>
-                                        </div>
-                                        <div class="sc-product-content-reviews-rating fw-600"><span class="fsz-32 ">{{ oct_rating }}</span><span class="fsz-20 light-text"> / 5</span></div>
-                                        <div class="sc-product-content-reviews-rating-text light-text fsz-14 mb-4">{{ tab_review_c }}</div>
-                                        {% if review_guest %}
-                                            <button type="button" class="sc-btn sc-btn-outline sc-btn-outline-primary br-4" data-bs-toggle="modal" data-bs-target="#reviewModal">{{ tab_review_add }}</button>
-                                            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header p-4">
-                                                            <h5 class="modal-title fsz-20 d-flex align-items-center justify-content-between" id="reviewModalLabel">{{ text_write }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body p-4">
-                                                            <form id="popup_review_form">
-                                                                <div class="content-block d-flex modal-body-product br-8 mb-4">
-                                                                    <div class="modal-body-product-img p-2 br-8 d-flex align-items-center justify-content-center">
-                                                                        <img src="{{ thumb }}" alt="{{ heading_title }}" width="64" height="64">
-                                                                    </div>
-                                                                    <div class="modal-body-product-info ps-3 dark-text d-flex flex-column justify-content-between">
-                                                                        <div class="modal-body-product-title fw-700 fsz-12">{{ heading_title }}</div>
-                                                                        <div class="sc-module-rating-box d-flex align-items-center">
-                                                                            <span class="fw-700 dark-text pe-2 pe-sm-4">{{ text_oct_review }}</span>
-                                                                            <div class="sc-module-rating d-flex align-items-center br-4">
-                                                                                <div class="sc-module-rating-stars d-flex align-items-center">
-                                                                                    <label class="sc-module-rating-star sc-module-rating-star-is"><input class="d-none" type="radio" name="rating" value="1" checked/></label>
-                                                                                    <label class="sc-module-rating-star sc-module-rating-star-is"><input class="d-none" type="radio" name="rating" value="2" checked/></label>
-                                                                                    <label class="sc-module-rating-star sc-module-rating-star-is"><input class="d-none" type="radio" name="rating" value="3" checked/></label>
-                                                                                    <label class="sc-module-rating-star sc-module-rating-star-is"><input class="d-none" type="radio" name="rating" value="4" checked/></label>
-                                                                                    <label class="sc-module-rating-star sc-module-rating-star-is"><input class="d-none" type="radio" name="rating" value="5" checked/></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <script>
-                                                                                window.addEventListener('DOMContentLoaded', () => {
-                                                                                    reviewsRating('#popup_review_form');
-                                                                                });
-                                                                            </script>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group pb-3">
-                                                                     <label for="inputReviewName" class="fsz-14 dark-text fw-500 pb-1"><span class="required">* </span>{{ entry_name }}</label>
-                                                                    <input type="text" name="name" class="form-control" id="inputReviewName" placeholder="{{ entry_name }}" inputmode="text">
-                                                                </div>
-                                                                <div class="form-group pb-3">
-                                                                    <label for="inputReviewComment" class="fsz-14 dark-text fw-500 pb-1"><span class="required">* </span>{{ oct_product_yourreview }}</label>
-                                                                    <textarea id="inputReviewComment" name="text" class="form-control" placeholder="{{ oct_product_yourreview }}"></textarea>
-                                                                </div>
-                                                                <div class="sc-modal-comment fsz-12">{{ text_note }}</div>
-                                                                <div class="form-group pb-3">
-                                                                    {{ captcha }}
-                                                                </div>
-                                                                <button type="button" id="button-review" class="sc-btn sc-btn-primary br-2">{{ button_continue }}</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="sc-product-content-reviews-summary">
-                                        {% for oct_key, oct_raiting_stat in oct_raiting_stats %}
-                                            <div class="sc-product-content-reviews-rating-item d-flex align-items-center">
-                                                <div class="sc-product-content-reviews-rating-stars d-flex align-items-center">
-                                                    <span class="sc-module-rating-star{% if oct_key >= 5 %} sc-module-rating-star-is{% endif %}"></span>
-                                                    <span class="sc-module-rating-star{% if oct_key >= 4 %}  sc-module-rating-star-is{% endif %}"></span>
-                                                    <span class="sc-module-rating-star{% if oct_key >= 3 %}  sc-module-rating-star-is{% endif %}"></span>
-                                                    <span class="sc-module-rating-star{% if oct_key >= 2 %}  sc-module-rating-star-is{% endif %}"></span>
-                                                    <span class="sc-module-rating-star{% if oct_key >= 1 %}  sc-module-rating-star-is{% endif %}"></span>
-                                                </div>
-                                                <div class="sc-product-content-reviews-rating-line">
-                                                    <span class="sc-product-content-reviews-rating-line-value" style="width: {{ oct_raiting_stat.raiting }}%;"></span>
-                                                </div>
-                                                <div class="sc-product-content-reviews-rating-value text-center">{{ oct_raiting_stat.sum }}</div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div id="review" class="dark-text fsz-14 mt-4">
-                                    {% if oct_reviews_list is not empty %}
-                                        {{ oct_reviews_list }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if oct_product_faq is defined and oct_product_faq %}
-                            {{ oct_product_faq }}
-                        {% endif %}
-                        {% if (dop_tab.title is defined and dop_tab.title) and (dop_tab.text is defined and dop_tab.text) %}
-                            <div id="product_dop_tab" class="sc-product-content-info pt-4 pt-md-0 px-3 px-lg-4">
-                                <div class="sc-product-content-title d-flex align-items-center">
-                                    <div class="sc-product-content-title-icon d-flex align-items-center justify-content-center br-4">
-                                        <img src="https://nawiteh.ua/image/catalog/menu/models.svg" alt="" width="16" height="16">
-                                    </div>
-                                    <span class="fsz-24 fw-600 dark-text">{{ dop_tab.title }}</span>
-                                </div>
-                                <div class="sc-product-content-text dark-text fsz-14 mt-3">{{ dop_tab.text }}</div>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col-lg-4 col-xl-3 sc-product-content-right p-3 px-md-0 p-lg-4 order-0 order-lg-1">
-                        {% if (oct_showcase_data.product_advantage is defined and oct_showcase_data.product_advantage == 'on') and (oct_product_advantages is defined and oct_product_advantages is not empty) %}
-                            <div class="sc-product-content-advantages d-flex flex-column flex-md-row flex-lg-column pb-lg-3 g-3">
-                                {% for advantage in oct_product_advantages %}
-                                    <div class="sc-product-content-advantages-item">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ advantage.icone }}" alt="" width="32" height="32" />
-                                            <a href="{{ advantage.link }}" {% if advantage.information_id and advantage.popup %} data-rel="{{ advantage.information_id }}" {% elseif advantage.link != "javascript:;" %} target="_blank" {% endif %} class="sc-product-content-advantages-item-title text-uppercase fsz-14 fw-600{% if advantage.popup %} agree{% endif %}">{{ advantage.title }}</a>
-                                        </div>
-                                        <div class="sc-product-content-advantages-item-text fsz-12 mt-2">
-                                            {{ advantage.text }}
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        <div class="sc-product-content-card sc-module-item sticky-top d-none d-lg-block">
-                            <div class="content-block d-flex flex-column">
-                                <div class="sc-module-img position-relative">
-                                    {% if thumb %}
-                                        <img class="img-fluid" src="{{ thumb }}" alt="" width="230" height="180">
-                                    {% endif %}
-                                    <div class="sc-module-btns d-flex flex-column position-absolute">
-                                        <button type="button" class="sc-btn sc-btn-outline sc-btn-outline-secondary sc-btn-with-icon br-4 sc-wishlist-btn" onclick="wishlist.add('{{ product_id }}');" title="{{ button_wishlist }}" aria-label="Wishlist button">
-                                            <span class="sc-btn-icon sc-btn-icon-wishlist"></span>
-                                        </button>
-                                        <button type="button" class="sc-btn sc-btn-outline sc-btn-outline-secondary sc-btn-with-icon br-4 sc-compare-btn" onclick="compare.add('{{ product_id }}');" title="{{ button_compare }}" aria-label="Compare button">
-                                            <span class="sc-btn-icon sc-btn-icon-compare"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="sc-module-caption d-flex flex-column justify-content-between py-md-2 h-100">
-                                    <div class="dark-text fw-700 fsz-14">{{ heading_title }}</div>
-                                    {% if price %}
-                                        <div class="sc-module-price-box py-2 mt-auto">
-                                            {% if not special %}
-                                                <div class="sc-module-price fw-800 dark-text mt-1">{{ price }}</div>
-                                            {% else %}
-                                                <div class="sc-module-price-old light-text fsz-14">{{ price }}</div>
-                                                <div class="sc-module-price fw-800 dark-text mt-1">{{ special }}</div>
-                                            {% endif %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                {% if can_buy %}
-                                    <div class="sc-module-cart d-flex align-items-stretch justify-content-between">
-                                        <div class="sc-module-quantity d-flex align-items-center justify-content-center py-1 br-12 {% if (is_rent == 1 or is_remont == 1) %}hidden{% endif %}">
-                                            <button type="button" aria-label="Minus" class="sc-module-quantity-btn d-flex align-items-center justify-content-center sc-minus">
-                                                <span class="minus"></span>
-                                            </button>
-                                            <input type="text" class="form-control" name="quantity" value="1" aria-label="Quantity" inputmode="numeric">
-                                            <button type="button" aria-label="Plus" class="sc-module-quantity-btn d-flex align-items-center justify-content-center sc-plus">
-                                                <span class="plus"></span>
-                                            </button>
-                                            <input type="hidden" name="product_id" value="{{ product_id }}">
-                                        </div>
-                                        <button type="button" class="sc-btn sc-btn-primary sc-btn-with-icon br-4 sc-product-fixed-cart-btn {% if (is_rent == 1 or is_remont == 1) %}hidden{% endif %} " aria-label="To cart">
-                                            <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--btn-cart-icon" alt="" width="20" height="20" class="sc-btn-icon sc-btn-icon-cart-img">
-                                            <span class="sc-btn-text">Купити</span>
-                                        </button>
-                                        {% if (is_rent == 1 or is_remont == 1) %}
-                                            <button type="button" id="button-cart-book" data-loading-text="{{ text_loading }}" class="sc-btn sc-btn-primary br-4" onclick="octPopupCallPhone();">
-                                                <img src="catalog/view/theme/oct_showcase/img/sprite.svg#include--btn-cart-icon" alt="" width="20" height="20" class="sc-btn-icon sc-btn-icon-cart-img">
-                                                <span class="sc-btn-text">Замовити</span>
-                                            </button>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    {% if products %}
-        {{ products }}
-    {% endif %}
-    {% if oct_related_articles %}
-        <div id="sc-related-article" class="row mt-3 mt-md-0 p-3 p-md-0 pt-xl-3 g-3 g-xl-4 sc-module">
-            <div class="sc-module-header fsz-22 dark-text fw-700 text-center text-md-start mt-0 mt-md-2 mb-2">{{ oct_product_related_articles }}</div>
-            {% for article in oct_related_articles %}
-                <div class="sc-last-news-item">
-                    <div class="content-block h-100 d-flex flex-column p-0 pb-3 overflow-hidden">
-                            <a href="{{ article.href }}" title="{{ article.name }}">
-                                <img src="{{ article.thumb }}"{% if oct_lazyload is defined and oct_lazyload %} data-srcset="{{ article.thumb }} 100w" srcset="{{ oct_lazy_image }} 100w" sizes="100vw" class="img-fluid oct-lazy"{% else %} class="img-fluid w-md-100"{% endif %} alt="{{ article.name }}" width="{{ article.width }}" height="{{ article.height }}" />
-                            </a>
-                        <div class="sc-last-news-caption d-flex flex-column justify-content-between w-100">
-                            <div class="sc-last-news-info d-flex align-items-center justify-content-between p-3">
-                                <div class="d-flex align-items-center">
-                                    {% for blog_category_name in article.blog_categories %}
-                                        <span class="sc-module-sticker br-4 fsz-10 fw-500 sc-module-sticker-green me-1">{{ blog_category_name }}</span>
-                                    {% endfor %}
-                                </div>
-                                <span class="sc-last-news-item-date fsz-12">{{ article.date_added }}</span>
-                            </div>
-                            <a href="{{ article.href }}" class="sc-last-news-title fw-700 fsz-14 dark-text px-3">{{ article.name }}</a>
-                        </div>
-                    </div>
-                </div>
+        {% if column_left or column_right %}
+        {% set class = 'col-sm-6' %}
+        {% else %}
+        {% set class = 'col-sm-4' %}
+        {% endif %}
+        <div class="{{ class }}">
+          <div class="btn-group">
+            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart"></i></button>
+            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button>
+          </div>
+          <h1>{{ heading_title }}</h1>
+          <ul class="list-unstyled">
+            {% if manufacturer %}
+            <li>{{ text_manufacturer }} <a href="{{ manufacturers }}">{{ manufacturer }}</a></li>
+            {% endif %}
+            <li>{{ text_model }} {{ model }}</li>
+            {% if reward %}
+            <li>{{ text_reward }} {{ reward }}</li>
+            {% endif %}
+            <li>{{ text_stock }} {{ stock }}</li>
+          </ul>
+          {% if price %}
+          <ul class="list-unstyled">
+            {% if not special %}
+            <li>
+              <h2>{{ price }}</h2>
+            </li>
+            {% else %}
+            <li><span style="text-decoration: line-through;">{{ price }}</span></li>
+            <li>
+              <h2>{{ special }}</h2>
+            </li>
+            {% endif %}
+            {% if tax %}
+            <li>{{ text_tax }} {{ tax }}</li>
+            {% endif %}
+            {% if points %}
+            <li>{{ text_points }} {{ points }}</li>
+            {% endif %}
+            {% if discounts %}
+            <li>
+              <hr>
+            </li>
+            {% for discount in discounts %}
+            <li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
             {% endfor %}
+            {% endif %}
+          </ul>
+          {% endif %}
+          <div id="product"> {% if options %}
+            <hr>
+            <h3>{{ text_option }}</h3>
+            {% for option in options %}
+            {% if option.type == 'select' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
+                <option value="">{{ text_select }}</option>
+                {% for option_value in option.product_option_value %}
+                <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                {% if option_value.price %}
+                ({{ option_value.price_prefix }}{{ option_value.price }})
+                {% endif %} </option>
+                {% endfor %}
+              </select>
+            </div>
+            {% endif %}
+            {% if option.type == 'radio' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label">{{ option.name }}</label>
+              <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+                    {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
+                    {{ option_value.name }}
+                    {% if option_value.price %}
+                    ({{ option_value.price_prefix }}{{ option_value.price }})
+                    {% endif %} </label>
+                </div>
+                {% endfor %} </div>
+            </div>
+            {% endif %}
+            {% if option.type == 'checkbox' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label">{{ option.name }}</label>
+              <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" />
+                    {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
+                    {{ option_value.name }}
+                    {% if option_value.price %}
+                    ({{ option_value.price_prefix }}{{ option_value.price }})
+                    {% endif %} </label>
+                </div>
+                {% endfor %} </div>
+            </div>
+            {% endif %}
+            {% if option.type == 'text' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control" />
+            </div>
+            {% endif %}
+            {% if option.type == 'textarea' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <textarea name="option[{{ option.product_option_id }}]" rows="5" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control">{{ option.value }}</textarea>
+            </div>
+            {% endif %}
+            {% if option.type == 'file' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label">{{ option.name }}</label>
+              <button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default btn-block"><i class="fa fa-upload"></i> {{ button_upload }}</button>
+              <input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id }}" />
+            </div>
+            {% endif %}
+            {% if option.type == 'date' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <div class="input-group date">
+                <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD" id="input-option{{ option.product_option_id }}" class="form-control" />
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                </span></div>
+            </div>
+            {% endif %}
+            {% if option.type == 'datetime' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <div class="input-group datetime">
+                <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                </span></div>
+            </div>
+            {% endif %}
+            {% if option.type == 'time' %}
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <div class="input-group time">
+                <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                </span></div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% if recurrings %}
+            <hr>
+            <h3>{{ text_payment_recurring }}</h3>
+            <div class="form-group required">
+              <select name="recurring_id" class="form-control">
+                <option value="">{{ text_select }}</option>
+                {% for recurring in recurrings %}
+                <option value="{{ recurring.recurring_id }}">{{ recurring.name }}</option>
+                {% endfor %}
+              </select>
+              <div class="help-block" id="recurring-description"></div>
+            </div>
+            {% endif %}
+            <div class="form-group">
+              <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
+              <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
+              <input type="hidden" name="product_id" value="{{ product_id }}" />
+              <br />
+              <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
+            </div>
+            {% if minimum > 1 %}
+            <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
+            {% endif %}</div>
+          {% if review_status %}
+          <div class="rating">
+            <p>{% for i in 1..5 %}
+              {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
+              {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
+            <hr>
+            <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style" data-url="{{ share }}"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
+            <!-- AddThis Button END --> 
+          </div>
+          {% endif %} </div>
+      </div>
+      {% if products %}
+      <h3>{{ text_related }}</h3>
+      <div class="row"> {% set i = 0 %}
+        {% for product in products %}
+        {% if column_left and column_right %}
+        {% set class = 'col-xs-8 col-sm-6' %}
+        {% elseif column_left or column_right %}
+        {% set class = 'col-xs-6 col-md-4' %}
+        {% else %}
+        {% set class = 'col-xs-6 col-sm-3' %}
+        {% endif %}
+        <div class="{{ class }}">
+          <div class="product-thumb transition">
+            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+            <div class="caption">
+              <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+              <p>{{ product.description }}</p>
+              {% if product.rating %}
+              <div class="rating"> {% for j in 1..5 %}
+                {% if product.rating < j %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> {% endif %}
+                {% endfor %} </div>
+              {% endif %}
+              {% if product.price %}
+              <p class="price"> {% if not product.special %}
+                {{ product.price }}
+                {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
+                {% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} </p>
+              {% endif %} </div>
+            <div class="button-group">
+              <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> <i class="fa fa-shopping-cart"></i></button>
+              <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+              <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+            </div>
+          </div>
         </div>
-    {% endif %}
-    {{ content_bottom }}
+        {% if column_left and column_right and (i + 1) % 2 == 0 %}
+        <div class="clearfix visible-md visible-sm"></div>
+        {% elseif column_left or column_right and (i + 1) % 3 == 0 %}
+        <div class="clearfix visible-md"></div>
+        {% elseif (i + 1) % 4 == 0 %}
+        <div class="clearfix visible-md"></div>
+        {% endif %}
+        {% set i = i + 1 %}
+        {% endfor %} </div>
+        {% endif %}
+        {% if tags %}
+        <p>{{ text_tags }}
+        {% for i in 0..tags|length - 1 %}
+        {% if i < (tags|length - 1) %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a>,
+        {% else %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a> {% endif %}
+        {% endfor %} </p>
+        {% endif %}
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
 </div>
-{% if oct_product_main_image_option_status is defined and oct_product_main_image_option_status %}
-	<script>
-	$(document).on('change', '#sc-product-options .radio', function() {
-
-		$.ajax({
-		url: 'index.php?route=product/product/getPImages&product_id={{ product_id }}',
+<script type="text/javascript"><!--
+$('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
+	$.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
 		type: 'post',
-		data: $('#sc-product-options input[type=\'radio\']:checked'),
+		data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
 		dataType: 'json',
+		beforeSend: function() {
+			$('#recurring-description').html('');
+		},
 		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
 
-			if (json['images']) {
-                $('.sc-product-images-additional, .sc-product-images-main').slick('slickRemove', null, null, true);
-                $.fancybox.destroy();
-
-                const obj = JSON.parse(JSON.stringify(json['images']));
-
-                Object.keys(obj).forEach(el => {
-                    const popupImage = obj[el].popup,
-                        thumbImage = obj[el].thumb,
-                        sliderImage = obj[el].thumb_slider,
-                        width = obj[el].width,
-                        height = obj[el].height,
-                        thumbHeight = obj[el].thumb_height,
-                        thumbWidth = obj[el].thumb_width;
-
-                    $('.sc-product-images-additional').slick('slickAdd',`
-                        <div class="image-additional-item">
-                            <a class="sc-product-images-additional-item" href="${thumbImage}" onClick="return false;" data-href="${thumbImage}">
-                                <img src="${thumbImage}" width="${thumbWidth}" height="${thumbHeight}" />
-                            </a>
-                        </div>`);
-
-                    $('.sc-product-images-main').slick('slickAdd',`
-                        <div class="sc-product-images-slide sc-product-images-slide-opt pb-3 pb-md-4">
-                            <a href="${popupImage}" class="oct-gallery d-block" onClick="return false;">
-                                <img src="${sliderImage}" width="${width}" height="${height}" class="d-block mx-auto" />
-                            </a>
-                        </div>`);
-                });
-
-                {% if oct_showcase_data.product_zoom is defined and oct_showcase_data.product_zoom %}
-                    $(".oct-gallery").zoom();
-                {% endif %}
-
-                let sliderProductsOpt = $('.sc-product-images-slide-opt:not(.slick-cloned) a');
-
-                $('.sc-product-images-slide a').on('click', function(e) {
-                    e.preventDefault();
-
-                    var totalSlides = $(this).parents('.sc-product-images-main').slick("getSlick").slideCount,
-                        dataIndex = $(this).parents('.sc-product-images-slide').data('slick-index'),
-                        trueIndex;
-
-                    switch(true) {
-                        case (dataIndex < 0):
-                            trueIndex = totalSlides+dataIndex;
-
-                            break;
-                        case (dataIndex >= totalSlides):
-                            trueIndex = dataIndex%totalSlides;
-
-                            break;
-                        default:
-                            trueIndex = dataIndex;
-                    }
-
-                    $.fancybox.open(sliderProductsOpt, {backFocus: false, hideScrollbar: false}, trueIndex);
-
-                    return false;
-                });
+			if (json['success']) {
+				$('#recurring-description').html(json['success']);
 			}
 		}
-		});
 	});
-	</script>
-{% endif %}
-<script>
-    $('select[name=\'recurring_id\'], input[name="quantity"]').change(function() {
-        $.ajax({
-            url: 'index.php?route=product/product/getRecurringDescription',
-            type: 'post',
-            data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
-            dataType: 'json',
-            cache: false,
-            beforeSend: function() {
-                $('#recurring-description').html('');
-            },
-            success: function(json) {
-                $('.alert-dismissible, .text-danger').remove();
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#button-cart').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
 
-                if (json['success']) {
-                    $('#recurring-description').html(json['success']);
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $('body').on('click', '#button-cart, .sc-product-fixed-cart-btn', function(){
-        let data;
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						var element = $('#input-option' + i.replace('_', '-'));
 
-        if (this.classList.contains('sc-product-fixed-cart-btn')) {
-            data = $('.sc-product-content-card input[type=\'text\'], .sc-product-content-card input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #product input[type=\'date\'], #product input[type=\'datetime-local\'], #product input[type=\'time\']');
-        } else {
-            data = $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #product input[type=\'date\'], #product input[type=\'datetime-local\'], #product input[type=\'time\']');
+						if (element.parent().hasClass('input-group')) {
+							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						} else {
+							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						}
+					}
+				}
+
+				if (json['error']['recurring']) {
+					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+			}
+
+			if (json['success']) {
+				$('.breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+				$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+
+				$('html, body').animate({ scrollTop: 0 }, 'slow');
+
+				$('#cart > ul').load('index.php?route=common/cart/info ul li');
+			}
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
+	});
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+	language: '{{ datepicker }}',
+	pickTime: false
+});
 
-        $.ajax({
-            url: 'index.php?route=checkout/cart/add',
-            type: 'post',
-            data: data,
-            dataType: 'json',
-            cache: false,
-            beforeSend: function() {
-                $('#button-cart').button('loading');
-            },
-            complete: function() {
-                $('#button-cart').button('reset');
-            },
-            success: function(json) {
-                $('.alert-dismissible, .text-danger').remove();
-                $('.form-group').removeClass('has-error');
+$('.datetime').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: true,
+	pickTime: true
+});
 
-                if (json['error']) {
-                    if (json['error']['option']) {
-                        let errorOption = '';
-                        for (i in json['error']['option']) {
-                            var element = $('#input-option' + i.replace('_', '-'));
+$('.time').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: false
+});
 
-                            if (element.parent().hasClass('input-group')) {
-                                element.parent().after('<div class="text-danger fsz-14 fw-500 mb-4">' + json['error']['option'][i] + '</div>');
-                            } else {
-                                element.parent().after('<div class="text-danger fsz-14 fw-500 mb-4">' + json['error']['option'][i] + '</div>');
-                            }
-                            errorOption += '<div class="alert-text-item">' + json['error']['option'][i] + '</div>';
-                        }
-                        scNotify('danger', errorOption);
+$('button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
 
-                        scrollToElement('.sc-product-actions-middle', false, -110);
-                        return;
-                    }
+	$('#form-upload').remove();
 
-                    if (json['error']['error_warning']) {
-                        scNotify('danger', json['error']['error_warning']);
-                    }
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
 
-                    if (json['error']['recurring']) {
-                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
-                    }
+	$('#form-upload input[name=\'file\']').trigger('click');
 
-                    // Highlight any found errors
-                    $('.text-danger').parent().addClass('has-error');
-                }
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
 
-                if (json['success']) {
-                    if (json['isPopup']) {
-                        octPopupCart();
-                    } else {
-                        scNotify('success', json['success']);
-                    }
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
 
-                    let cartIdsHolder = document.querySelector("[data-cart-ids]");
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
 
-                    if (json.oct_cart_ids && json.oct_cart_ids.length > 0 && cartIdsHolder) {
-                        cartIdsHolder.dataset.cartIds = json.oct_cart_ids;
-                        setCartBtnAdded();
-                    }
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
 
-                    // Need to set timeout otherwise it wont update the total
-                    setTimeout(function() {
-                        $('#cart .header-buttons-cart-quantity').html(json['total_products']);
-                        $('.rm-header-cart-text').html(json['total_amount']);
-                    }, 100);
-                }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
-    });
-</script>
-<script>
-    $('button[id^=\'button-upload\']').on('click', function() {
-        var node = this;
+					if (json['success']) {
+						alert(json['success']);
 
-        $('#form-upload').remove();
+						$(node).parent().find('input').val(json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#review').delegate('.pagination a', 'click', function(e) {
+    e.preventDefault();
 
-        $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+    $('#review').fadeOut('slow');
 
-        $('#form-upload input[name=\'file\']').trigger('click');
+    $('#review').load(this.href);
 
-        if (typeof timer != 'undefined') {
-            clearInterval(timer);
-        }
+    $('#review').fadeIn('slow');
+});
 
-        timer = setInterval(function() {
-            if ($('#form-upload input[name=\'file\']').val() != '') {
-                clearInterval(timer);
+$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
 
-                $.ajax({
-                    url: 'index.php?route=tool/upload',
-                    type: 'post',
-                    dataType: 'json',
-                    data: new FormData($('#form-upload')[0]),
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $(node).button('loading');
-                    },
-                    complete: function() {
-                        $(node).button('reset');
-                    },
-                    success: function(json) {
-                        $('.text-danger').remove();
+$('#button-review').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+		type: 'post',
+		dataType: 'json',
+		data: $("#form-review").serialize(),
+		beforeSend: function() {
+			$('#button-review').button('loading');
+		},
+		complete: function() {
+			$('#button-review').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible').remove();
 
-                        if (json['error']) {
-                            $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
-                        }
+			if (json['error']) {
+				$('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
 
-                        if (json['success']) {
-                            alert(json['success']);
+			if (json['success']) {
+				$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
 
-                            $(node).parent().find('input').val(json['code']);
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                    }
-                });
-            }
-        }, 500);
-    });
-</script>
-<script>
-    $('#review').delegate('.pagination a', 'click', function(e) {
-        e.preventDefault();
-        $('#review').load(this.href);
-        scrollToElement('.sc-product-content-reviews', false, -140);
-    });
+				$('input[name=\'name\']').val('');
+				$('textarea[name=\'text\']').val('');
+				$('input[name=\'rating\']:checked').prop('checked', false);
+			}
+		}
+	});
+});
 
-    $("#inputReviewName, #inputReviewComment").on("change paste keyup", function() {
-        $(this).removeClass('error_style');
-    });
-
-    $('#button-review').on('click', function() {
-        $.ajax({
-            url: 'index.php?route=product/product/write&product_id={{ product_id }}',
-            type: 'post',
-            dataType: 'json',
-            cache: false,
-            data: $('#popup_review_form').serialize(),
-            beforeSend: function() {
-                $('#button-review').button('loading');
-            },
-            complete: function() {
-                $('#button-review').button('reset');
-            },
-            success: function(json) {
-                $('.alert-dismissible').remove();
-
-                if (json['error']) {
-                    let errorOption = '';
-
-                    $.each(json['error'], function(i, val) {
-                        $('#reviewModal [name="' + i + '"]').addClass('error_style');
-                        errorOption += '<div class="alert-text-item">' + val + '</div>';
-                    });
-
-                    scNotify('danger', errorOption);
-                }
-
-                if (json['success']) {
-                    scNotify('success', json['success']);
-                    $('#reviewModal').modal('hide');
-                    $('#popup_review_form input[name=\'name\']').val('');
-                    $('#popup_review_form textarea[name=\'text\']').val('');
-                    $('#reviewModal .rm-module-rating-star-is').removeClass('rm-module-rating-star-is');
-                }
-            }
-        });
-    });
-
-    $('#input-quantity').on('change', function(e) {
-        updateValueProduct(false, false, true);
-    });
-
-    function updateValueProduct(minus, plus, manual) {
-        let min = parseInt($('#input-quantity').val());
-        let currentMinimum = parseInt($('#min-product-quantity').val());
-        let max = parseInt($('#max-product-quantity').val());
-
-        if (max === 0)
-            return;
-
-        if (minus && min > 1) {
-
-            if (currentMinimum >= min) {
-                $("#input-quantity").val(currentMinimum);
-                updateProductPrice();
-                return;
-            } else if (min > max) {
-                $('#input-quantity').val(max);
-                updateProductPrice();
-                return;
-            }
-
-            $('#input-quantity').val(~~ $('#input-quantity').val() - 1);
-        }
-
-        if (plus) {
-            if (max && min > max - 1) {
-                $('#input-quantity').val(max);
-                updateProductPrice();
-                return;
-            } else if (currentMinimum > min) {
-                $('#input-quantity').val(currentMinimum);
-                updateProductPrice();
-                return;
-            }
-
-            $('#input-quantity').val(~~ $('#input-quantity').val() + 1);
-        }
-
-        if (manual) {
-            if (currentMinimum >= min) {
-                $('#input-quantity').val(currentMinimum);
-                updateProductPrice();
-                return;
-            } else if (min > max) {
-                $('#input-quantity').val(max);
-                updateProductPrice();
-                return;
-            }
-
-        }
-
-        updateProductPrice();
-    }
-
-    $('#sc-product-options input, #sc-product-options select').on('change', function() {
-        updateProductPrice();
-    });
-
-    {% if oct_showcase_data.product_zoom is defined and oct_showcase_data.product_zoom %}
-    $( document ).ready(function() {
-        $(".oct-gallery").zoom();
-    });
-    {% endif %}
-
-    function updateProductPrice() {
-        $.ajax({
-            type: 'post',
-            url: 'index.php?route=octemplates/main/oct_functions/updatePrices',
-            data: $('#product input[type=\'text\'], #product input[type=\'hidden\']:not("#oct_purchase_byoneclick_form_product input"), #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select'),
-            dataType: 'json',
-            cache: false,
-            success: function(json) {
-                {% if special %}
-                    $('#product .sc-module-price-old').html(json['price']);
-                    $('#product .sc-module-price').html(json['special']);
-                {% else %}
-                    $('#product .sc-module-price').html(json['price']);
-                {% endif %}
-
-                {% if oct_sticker_you_save and you_save %}
-                    $('#main-product-you-save').html(json['you_save']);
-                {% endif %}
-
-                {% if tax %}
-                    $('.price-tax > span').html(json['tax']);
-                {% endif %}
-        }
-    });
-}
-{% if minimum > 1 %}
-    updateProductPrice();
-{% endif %}
-</script>
-{% if oct_showcase_data.micro is defined and oct_showcase_data.micro %}
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "url": "{{ share }}",
-    "category": "{{ oct_product_categories }}",
-    "image": "{{ thumb }}",
-    "brand": {"@type": "Brand","name": "{{ manufacturer }}"},
-    "manufacturer": "{{ manufacturer }}",
-    "model": "{{ model }}",
-    "productID": "{{ product_id }}",
-    {% if upc is defined and upc%}
-    "gtin12": "{{ upc }}",
-    {% endif %}
-    {% if ean is defined and ean %}
-    "gtin": "{{ ean }}",
-    {% endif %}
-    {% if mpn is defined and mpn %}
-    "mpn": "{{ mpn }}",
-    {% endif %}
-    {% if sku is defined and sku  %}
-    "sku": "{{ sku }}",
-    {% endif %}
-    {% if rating %}
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "{{ rating }}",
-        "ratingCount": "{{ total_reviews }}",
-        "reviewCount": "{{ total_reviews }}",
-        "bestRating": "5",
-        "worstRating": "1"
-    },
-    {% endif %}
-
-    "description": "{{ oct_description_microdata }}",
-    "name": "{{ oct_micro_heading_title }}",
-
-    "offers": {
-        "@type": "Offer",
-        "url": "{{ share }}",
-
-        {% if oct_special_microdata %}
-        {% set special_date = 'now'|date_modify("+30 day") %}
-        "priceValidUntil" : "{{ special_date|date('Y-m-d') }}",
-        {% else %}
-        "priceValidUntil" : "{{ now|date_modify("+60 days") | date("Y-m-d") }}",
-        {% endif %}
-
-        {% if out_of_stock %}
-        "availability": "https://schema.org/OutOfStock",
-        {% else %}
-        "availability": "https://schema.org/InStock",
-        {% endif %}
-
-        "price": "{% if not oct_special_microdata %}{{ oct_price_microdata }}{% else %}{{ oct_special_microdata }}{% endif %}",
-        "priceCurrency": "{{ oct_price_currency }}",
-        "itemCondition": "https://schema.org/NewCondition"
-
-    {% if rating %}
-    },
-
-    "review": [
-        {% for rew_one in oct_reviews_all %}
-        {
-            "@type": "Review",
-            "author": {
-			   "@type": "Person",
-			   "name": "{{ rew_one.author }}"
-			},
-            "datePublished": "{{ rew_one.date_added }}",
-            "description": "{{ rew_one.text }}",
-            "reviewRating": {
-                "@type": "Rating",
-                "bestRating": "5",
-                "ratingValue": "{{ rew_one.rating }}",
-                "worstRating": "1"
-            }
-        }{% if oct_reviews_all|length > loop.index %},{% endif %}
-
-        {% endfor %}
-    ]
-    {% else %}
-    }
-    {% endif %}
-}
-</script>
-{% endif %}
-{{ footer }}
+$(document).ready(function() {
+	$('.thumbnails').magnificPopup({
+		type:'image',
+		delegate: 'a',
+		gallery: {
+			enabled: true
+		}
+	});
+});
+//--></script> 
+{{ footer }} 
